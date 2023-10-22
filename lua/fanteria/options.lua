@@ -26,12 +26,16 @@ o.iskeyword:append("-")
 
 -- Folding
 o.foldlevel = 20
-o.foldmethod = "expr"
+-- o.foldmethod = "expr"
 -- o.foldexpr = "nvim_treesitter#foldexpr()"
-o.foldtext = "substitute(getline(v:foldstart),'\\t',repeat(' ',&tabstop),'g').' ... '.trim(getline(v:foldend))" -- formatted folding
+-- o.foldtext = "substitute(getline(v:foldstart),'\\t',repeat(' ',&tabstop),'g').' ... '.trim(getline(v:foldend))" -- formatted folding
 o.fillchars = "fold: "
 o.foldnestmax = 3
 o.foldminlines = 1
+o.foldcolumn = '1' -- '0' is not bad
+o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+o.foldlevelstart = 99
+o.foldenable = true
 
 -- Tabs and spaces
 o.smartindent = true
