@@ -1,10 +1,10 @@
-require("fanteria.options")
 require("fanteria.plugins")
+require("fanteria.options")
 
 require("fanteria.elemental.treesitter")
 require("fanteria.elemental.treesitter-context")
 require("fanteria.elemental.lspconfig")
--- require("fanteria.elemental.mason")
+require("fanteria.elemental.mason")
 require("fanteria.elemental.cmp")
 
 require("fanteria.visual.bufferline")

@@ -9,7 +9,7 @@ gitsigns.setup({
     add = { text = "▎" },
     change = { text = "▎" },
     delete = { text = "" },
-    topdelete = { text = "G" },
+    topdelete = { text = "" },
     changedelete = { text = "▎" },
   },
 })

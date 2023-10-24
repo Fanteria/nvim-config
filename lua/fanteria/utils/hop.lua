@@ -4,6 +4,4 @@ if not hop_ok then
   return
 end
 
-hop.setup({
-  create_hl_autocmd = true,
-})
+hop.setup()

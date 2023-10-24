@@ -1,7 +1,7 @@
 local comment_ok, comment = pcall(require, "Comment")
 if not comment_ok then
   print("Comment cannot be loaded.")
-	return
+  return
 end
 
 comment.setup()

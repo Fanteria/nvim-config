@@ -22,8 +22,24 @@ telescope.setup ({
       },
     }
   },
+  extensions = {
+    undo = {
+      mappings = {
+        i = {
+          ["yy"] = require("telescope-undo.actions").yank_additions,
+          ["yd"] = require("telescope-undo.actions").yank_deletions,
+          ["<cr>"] = require("telescope-undo.actions").restore,
+        },
+        n = {
+          ["yy"] = require("telescope-undo.actions").yank_additions,
+          ["yd"] = require("telescope-undo.actions").yank_deletions,
+          ["<cr>"] = require("telescope-undo.actions").restore,
+        },
+      },
+    },
+  },
 })
-telescope.load_extension("undo") -- TODO how to select item in history??
+telescope.load_extension("undo")
 
 local project_ok, project = pcall(require, "project_nvim")
 if project_ok then

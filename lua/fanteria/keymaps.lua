@@ -114,7 +114,9 @@ local hop_hint_ok, hop_hint = pcall(require, "hop.hint")
 if hop_ok and hop_hint_ok then
   local d = hop_hint.HintDirection
 
-  map({ "n", "v", "x" }, "<leader>s", hop.hint_char1, opts)
+  map({ "n", "v", "x" }, "<leader>s", function()
+    hop.hint_char1({ multi_windows = true })
+  end, opts)
 
   map({ "n", "v", "x" }, "s", function()
     hop.hint_char1({ direction = d.AFTER_CRUSOR, current_line_only = true })
@@ -125,7 +127,6 @@ if hop_ok and hop_hint_ok then
   end, opts)
 end
 
--- TODO check if this works
 local context_ok, context = pcall(require, "treesitter-context")
 if context_ok then
   map("n", "gC", context.go_to_context, opts)

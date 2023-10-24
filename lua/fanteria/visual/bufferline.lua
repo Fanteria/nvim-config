@@ -6,8 +6,8 @@ end
 
 bufferline.setup({
   options = {
-    -- themable = true,
-    -- style_preset = bufferline.style_preset.minimal,
+    themable = true,
+    style_preset = bufferline.style_preset.minimal,
     offsets = {
       { filetype = "NvimTree", text = "File explorer" },
       { filetype = "undotree", text = "Undo tree" },

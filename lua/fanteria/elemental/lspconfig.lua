@@ -1,6 +1,3 @@
--- Thanks lsp-zero for amazing config.
--- https://github.com/VonHeikemen/lsp-zero.nvim/tree/v3.x
-
 local lspconfig_ok, lspconfig = pcall(require, "lspconfig")
 if not lspconfig_ok then
   print("Lspconfig cannot be loaded.")
@@ -8,6 +5,18 @@ if not lspconfig_ok then
 end
 local lsp_defaults = lspconfig.util.default_config
 
+-- Setup signs
+local signs = {
+  { name = "DiagnosticSignError", text = "" },
+  { name = "DiagnosticSignWarn", text = "" },
+  { name = "DiagnosticSignHint", text = "" },
+  { name = "DiagnosticSignInfo", text = "" },
+}
+for _, sign in ipairs(signs) do
+  vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+end
+
+-- Setup LSP defaults
 lsp_defaults.capabilities = vim.tbl_deep_extend(
   'force',
   lsp_defaults.capabilities,
@@ -36,58 +45,113 @@ vim.api.nvim_create_autocmd('LspAttach', { -- TODO check nvim_create_autocmd
   end
 })
 
-local default_setup = function(server)
-  lspconfig[server].setup({})
-end
+-- require('mason-lspconfig').setup_handlers {
+--   function(server_name)    -- default handler (optional)
+--     require("lspconfig")[server_name].setup {}
+--   end,
+--   -- Next, you can provide a dedicated handler for specific servers.
+--   -- For example, a handler override for the `rust_analyzer`:
+--   -- ["rust_analyzer"] = function ()
+--   --     require("rust-tools").setup {}
+--   -- end
+--   -- ["clangd"] = function()
+--   --   require("lspconfig").clangd.setup({
+--   --     settings = {
+--   --     },
+--   --   })
+--   -- end,
+--   ["lua_ls"] = function()
+--     require("lspconfig").lua_ls.setup({
+--       settings = {
+--         Lua = {
+--           runtime = {
+--             version = 'LuaJIT'
+--           },
+--           diagnostics = {
+--             globals = { "vim" },
+--           },
+--         },
+--       },
+--     })
+--   end,
+-- }
 
-require('mason').setup({})
-require('mason-lspconfig').setup({
-  ensure_installed = {},
-  handlers = { default_setup },
-})
+-- require'lspconfig'.lua_ls.setup {
+--   on_init = function(client)
+--     print("HELLO")
+--     local path = client.workspace_folders[1].name
+--     if not vim.loop.fs_stat(path..'/.luarc.json') and not vim.loop.fs_stat(path..'/.luarc.jsonc') then
+--       client.config.settings = vim.tbl_deep_extend('force', client.config.settings, {
+--         Lua = {
+--           runtime = {
+--             -- Tell the language server which version of Lua you're using
+--             -- (most likely LuaJIT in the case of Neovim)
+--             version = 'LuaJIT'
+--           },
+--           diagnostics = {
+--             globals = { "vim" },
+--           },
+--           -- Make the server aware of Neovim runtime files
+--           workspace = {
+--             checkThirdParty = false,
+--             library = {
+--               vim.env.VIMRUNTIME
+--               -- "${3rd}/luv/library"
+--               -- "${3rd}/busted/library",
+--             }
+--             -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+--             -- library = vim.api.nvim_get_runtime_file("", true)
+--           }
+--         }
+--       })
+--
+--       client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+--       end
+--     print("hello")
+--     return true
+--   end
+-- }
 
-local cmp = require('cmp')
+-- require("lspconfig").lua_ls.setup({
+--   settings = {
+-- 			diagnostics = {
+-- 				globals = { "vim" },
+-- 			},
+--   },
+-- })
 
-cmp.setup({
-  sources = {
-    { name = 'nvim_lsp' },
-  },
-  mapping = cmp.mapping.preset.insert({
-    -- Enter key confirms completion item
-    ['<CR>'] = cmp.mapping.confirm({ select = false }),
+-- local lspconfig = require("lspconfig")
+-- local opts = {
+-- 	settings = {
+-- 		Lua = {
+-- 			diagnostics = {
+-- 				globals = { "vim" },
+-- 			},
+-- 			workspace = {
+-- 				library = {
+-- 					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+-- 					[vim.fn.stdpath("config") .. "/lua"] = true,
+-- 				},
+-- 			},
+-- 		},
+-- 	},
+-- }
+-- lspconfig.lua_ls.setup(opts)
 
-    -- Ctrl + space triggers completion menu
-    ['<C-Space>'] = cmp.mapping.complete(),
-  }),
-  snippet = {
-    expand = function(args)
-      require('luasnip').lsp_expand(args.body)
-    end,
-  },
-})
-
-require('mason-lspconfig').setup({
-  ensure_installed = {},
-  handlers = {
-    default_setup,
-    lua_ls = function()
-      require('lspconfig').lua_ls.setup({
-        settings = {
-          Lua = {
-            runtime = {
-              version = 'LuaJIT'
-            },
-            diagnostics = {
-              globals = { 'vim' },
-            },
-            workspace = {
-              library = {
-                vim.env.VIMRUNTIME,
-              }
-            }
-          }
-        }
-      })
-    end,
-  },
-})
+-- require('lspconfig').lua_ls.setup({
+--   settings = {
+--     Lua = {
+--       runtime = {
+--         version = 'LuaJIT'
+--       },
+--       diagnostics = {
+--         globals = { 'vim' },
+--       },
+--       -- workspace = {
+--       --   library = {
+--       --     vim.env.VIMRUNTIME,
+--       --   }
+--       -- }
+--     }
+--   }
+-- })

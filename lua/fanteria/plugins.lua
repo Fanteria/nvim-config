@@ -13,7 +13,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   -- Basic --
-  "wbthomason/packer.nvim",
   "nvim-lua/popup.nvim",
   "nvim-lua/plenary.nvim",
 
@@ -30,12 +29,27 @@ require("lazy").setup({
   },
 
   -- LSP
-  "neovim/nvim-lspconfig",   -- enable LSP
-  "williamboman/mason.nvim", -- simple to use language server installer
-  "williamboman/mason-lspconfig.nvim",
-  -- "jose-elias-alvarez/null-ls.nvim", -- for formatters and linters
-  -- "RRethy/vim-illuminate",
-  { 'VonHeikemen/lsp-zero.nvim', branch = 'v3.x' },
+  "williamboman/mason.nvim",
+  {
+    "neovim/nvim-lspconfig",
+    dependencies = {
+      "williamboman/mason-lspconfig.nvim",
+      {
+        "williamboman/mason-lspconfig.nvim",
+        dependencies = "williamboman/mason.nvim",
+      },
+    },
+    version = false,
+  },
+  "RRethy/vim-illuminate",
+
+  -- completions
+  -- TODO check validity of all completions
+  "hrsh7th/nvim-cmp",    -- The completion plugin
+  "hrsh7th/cmp-buffer",  -- buffer completions
+  "hrsh7th/cmp-path",    -- path completions
+  "hrsh7th/cmp-cmdline", -- cmdline completions
+  "hrsh7th/cmp-nvim-lsp",
 
   -- snippets
   {
@@ -43,15 +57,6 @@ require("lazy").setup({
     version = "v2.*",
     -- build = "make install_jsregexp"
   },
-  --[[ "rafamadriz/friendly-snippets", -- a bunch of snippets to use ]]
-
-  -- completions
-  "hrsh7th/nvim-cmp",    -- The completion plugin
-  "hrsh7th/cmp-buffer",  -- buffer completions
-  "hrsh7th/cmp-path",    -- path completions
-  "hrsh7th/cmp-cmdline", -- cmdline completions
-  -- "saadparwaiz1/cmp_luasnip", -- snippet completions
-  "hrsh7th/cmp-nvim-lsp",
 
   -- Utils --
   "folke/which-key.nvim",
@@ -64,8 +69,8 @@ require("lazy").setup({
   },
   "natecraddock/sessions.nvim", -- TODO Is this plugin really nessesary?
   {
-    "phaazon/hop.nvim",
-    branch = 'v2'
+    "smoka7/hop.nvim",
+    version = "*",
   },
   "kyazdani42/nvim-tree.lua",     -- file system for vim
   "kyazdani42/nvim-web-devicons", -- icons for nvim-tree
@@ -74,16 +79,25 @@ require("lazy").setup({
     dependencies = "nvim-treesitter/nvim-treesitter",
     version = "*"
   },
-  -- "windwp/nvim-autopairs",
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+  },
   {
     'numToStr/Comment.nvim',
     lazy = false,
+  },
+  {
+    'nvim-treesitter/playground',
+    dependencies = "nvim-treesitter/nvim-treesitter",
   },
 
   -- Git
   "lewis6991/gitsigns.nvim",
 
   -- Debugging
+  -- "mfussenegger/nvim-dap",
+  -- { "rcarriga/nvim-dap-ui", dependencies = "mfussenegger/nvim-dap" },
 
   -- Visual --
   "nvim-lualine/lualine.nvim",
@@ -96,13 +110,11 @@ require("lazy").setup({
   -- Colorscheme
   "marko-cerovac/material.nvim",
 
-
   -- Title page --
   "goolord/alpha-nvim",
   "ahmedkhalf/project.nvim",
 
   -- "akinsho/toggleterm.nvim",
-  -- "lewis6991/impatient.nvim",
   -- markdown preview
   -- {
   --   "iamcco/markdown-preview.nvim",
@@ -110,4 +122,4 @@ require("lazy").setup({
   --     vim.fn["mkdp#util#install"],
   --   end,
   -- },
-})
+}, {})

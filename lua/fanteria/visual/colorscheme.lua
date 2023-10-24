@@ -16,6 +16,7 @@ material.setup({
   plugins = {
     "gitsigns",
     "indent-blankline",
+    "illuminate", -- TODO how to separate visual from illuminated
     "nvim-cmp",
     "nvim-tree",
     -- "nvim-web-devicons",
@@ -32,37 +33,37 @@ material.setup({
     darker = true,
   },
   async_loading = true,
-	custom_highlights = {
+  custom_highlights = {
 
-    ["@variable.builtin"] = { fg = c.main.orange },
-		["@property"] = { fg = c.main.paleblue },
-		["@parameter"] = { fg = c.editor.fg },
+    ["@variable.builtin"]      = { fg = c.main.orange },
+    ["@property"]              = { fg = c.main.paleblue },
+    ["@parameter"]             = { fg = c.editor.fg },
 
-		["@type.qualifier"] = { fg = c.main.orange }, -- public and const keywords
+    ["@type.qualifier"]        = { fg = c.main.orange }, -- public and const keywords
 
-		["@keyword"] = { fg = c.main.purple },
-		["@namespace"] = { fg = c.main.paleblue },
-		["@string.escape"] = { fg = c.main.orange },
+    ["@keyword"]               = { fg = c.main.purple },
+    ["@namespace"]             = { fg = c.main.paleblue },
+    ["@string.escape"]         = { fg = c.main.orange },
 
-		["@punctuation.delimiter"] = { fg = c.editor.fg },
-		["@punctuation.bracket"] = { fg = c.editor.fg },
+    ["@punctuation.delimiter"] = { fg = c.editor.fg },
+    ["@punctuation.bracket"]   = { fg = c.editor.fg },
 
-    ["@constant"]         = { fg = c.main.yellow },
+    ["@constant"]              = { fg = c.main.yellow },
 
-	},
-	custom_colors = function(colors)
+  },
+  custom_colors = function(colors)
     if vim.g.material_style == "darker" then
-      colors.editor.bg = "#18151a"
-      colors.editor.bg_alt = "#18151a"
+      colors.editor.bg                       = "#18151a"
+      colors.editor.bg_alt                   = "#18151a"
       colors.backgrounds.sidebars            = colors.editor.bg
-      colors.backgrounds.floating_windows    = colors.editor.bg
+      colors.backgrounds.floating_windows    = "#141821"
       colors.backgrounds.non_current_windows = colors.editor.bg
     end
-		colors.syntax.type = colors.main.yellow
-		colors.syntax.operator = colors.main.red
+    colors.syntax.type = colors.main.yellow
+    colors.syntax.operator = colors.main.red
 
-		colors.git.added = colors.main.green
-	end,
+    colors.git.added = colors.main.green
+  end,
 })
 
 vim.cmd("colorscheme material")

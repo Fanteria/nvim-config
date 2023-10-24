@@ -3,9 +3,7 @@ if not treesitter_context_ok then
   return
 end
 
-treesitter_context.setup()
-
--- TODO
--- vim.keymap.set("n", "[c", function()
---   require("treesitter-context").go_to_context()
--- end, { silent = true })
+treesitter_context.setup({
+  enable = true,
+  multiline_threshold = 7,
+})

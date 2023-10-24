@@ -6,9 +6,6 @@ if not which_key_ok or not telescope_ok then
 end
 
 which_key.setup({
-  window = {
-    border = "rounded", -- TODO Really rounded?
-  },
   ignore_missing = true,
 })
 
@@ -52,33 +49,35 @@ map.u = { function()
   vim.api.nvim_feedkeys(keys,'m',false)
 end, "Undotree" }
 
--- TODO file with utils like below
 map.y = { '<cmd>let @+ = expand("%:p")<CR>', "Yank buffer path" }
 
 map.C = { "<cmd>ClangdSwitchSourceHeader<cr>", "Swap cpp/h"}
 
-map.L = { -- TODO review all options here
+map.L = {
   name = "LSP",
-  d = { -- TODO rework to lua
-    "<cmd>Telescope lsp_document_diagnostics<cr>",
-    "Document Diagnostics",
-  },
-  w = { -- TODO rework to lua
-    "<cmd>Telescope lsp_workspace_diagnostics<cr>",
-    "Workspace Diagnostics",
-  },
+  d = { telescope.diagnostics, "Diagnostics" },
   i = { "<cmd>LspInfo<cr>", "Info" },
   I = { "<cmd>Mason<cr>", "Installer Info" },
   l = { vim.lsp.codelens.run, "CodeLens Action" },
   q = { vim.lsp.diagnostic.set_loclist, "Quickfix" },
+  p = { "<cmd>TSPlaygroundToggle<CR>", "Treesitter playground" },
   s = { telescope.lsp_document_symbols, "Document Symbols" },
-  S = { -- TODO rework to lua
-    "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+  S = {
+    telescope.lsp_dynamic_workspace_symbols,
     "Workspace Symbols",
   },
 }
 
 map.O = { "<cmd>execute '!xdg-open' shellescape(expand('<cfile>', 1))<CR>", "Open path" }
+
+map.S = {
+  name = "Sessions",
+  l = { function () SessionLoad(require("telescope.themes").get_dropdown({})) end, "Load" },
+  s = { SessionSave, "Save" }
+}
+
+-- TODO
+-- map.T
 
 map.W = { ToggleWhitespaces, "Toggle whitespaces" }
 
@@ -91,6 +90,7 @@ map.X = {
   R = { telescope.registers, "Registers" },
   k = { telescope.keymaps, "Keymaps" },
   C = { telescope.commands, "Commands" },
+  L = { "<cmd>Lazy<CR>", "Lazy" },
 }
 
 which_key.register(map, { prefix = "<leader>", nowait = true })

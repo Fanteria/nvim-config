@@ -15,11 +15,13 @@ lualine.setup({
     lualine_b = { { "branch", icon = "" }, "diagnostics" },
     lualine_x = {
       { "diff", symbols = { added = " ", modified = " ", removed = " " } },
-      { "tabs" , padding = 1,
-          tabs_color = {
-            active = 'lualine_a_normal',
-            inactive = 'lualine_c_inactive',
-          },
+      {
+        "tabs",
+        padding = 1,
+        tabs_color = {
+          active = 'lualine_a_normal',
+          inactive = 'lualine_c_inactive',
+        },
       },
       "filetype",
     },
