@@ -108,6 +108,11 @@ if telescope_ok and telescope_theme_ok then
   end, opts)
 end
 
+-- Switch source and header
+map("n", "gh", "<cmd>ClangdSwitchSourceHeader<cr>", opts)
+map("n", "gsh", "<cmd>split | ClangdSwitchSourceHeader<cr>", opts)
+map("n", "gvh", "<cmd>vsplit | ClangdSwitchSourceHeader<cr>", opts)
+
 -- Hop
 local hop_ok, hop = pcall(require, "hop")
 local hop_hint_ok, hop_hint = pcall(require, "hop.hint")
@@ -153,4 +158,5 @@ map("x", "K", ":move '<-2<CR>gv-gv", opts)
 
 -- Sort selected lines
 map("x", "<C-s>", ":sort<CR>", opts)
-map("x", "<C-S-s>", ":sort u<CR>", opts)
+map("x", "<C-s>s", ":sort<CR>", opts)
+map("x", "<C-s>u", ":sort u<CR>", opts)

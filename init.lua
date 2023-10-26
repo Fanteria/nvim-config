@@ -7,7 +7,6 @@ require("fanteria.elemental.lspconfig")
 require("fanteria.elemental.mason")
 require("fanteria.elemental.cmp")
 
-require("fanteria.visual.bufferline")
 require("fanteria.visual.colorscheme")
 require("fanteria.visual.gitsigns")
 require("fanteria.visual.indent-blankline")
@@ -27,3 +26,4 @@ require("fanteria.keymaps")
 
 require("fanteria.title.alpha")
 
+require("fanteria.autocmd")

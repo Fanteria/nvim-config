@@ -13,7 +13,7 @@ local default_setup = function(server)
 end
 
 mason_lspconfig.setup({
-  ensure_installed = { "lua_ls", "clangd" },
+  ensure_installed = { "lua_ls", "clangd", "bashls", "rust_analyzer" },
   handlers = {
     default_setup,
     lua_ls = function()
@@ -34,7 +34,7 @@ mason_lspconfig.setup({
       lspconfig.clangd.setup({
         settings = {
           clangd = {
-            arguments = { "--std=c++20" },
+            arguments = { "--std=c++17" },
           },
         },
       })

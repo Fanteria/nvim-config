@@ -20,7 +20,25 @@ telescope.setup ({
         ["J"] = actions.toggle_selection + actions.move_selection_better,
         ["K"] = actions.toggle_selection + actions.move_selection_worse,
       },
-    }
+    },
+    sorting_strategy = "ascending",
+    layout_strategy = "flex",
+    -- borderchars = {" ", " ", " ", " ", " ", " ", " ", " "},
+    -- layout_strategy = function ()
+    --   return require("telescope.layout").horizontal()
+    -- end,
+    layout_config = {
+      horizontal = {
+        prompt_position = "top",
+        preview_width = 0.5,
+      },
+      vertical = {
+        prompt_position = "top",
+      },
+      flex = {
+        flip_columns = 120,
+      },
+    },
   },
   extensions = {
     undo = {

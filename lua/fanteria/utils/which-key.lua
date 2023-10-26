@@ -51,8 +51,6 @@ end, "Undotree" }
 
 map.y = { '<cmd>let @+ = expand("%:p")<CR>', "Yank buffer path" }
 
-map.C = { "<cmd>ClangdSwitchSourceHeader<cr>", "Swap cpp/h"}
-
 map.L = {
   name = "LSP",
   d = { telescope.diagnostics, "Diagnostics" },
@@ -72,8 +70,8 @@ map.O = { "<cmd>execute '!xdg-open' shellescape(expand('<cfile>', 1))<CR>", "Ope
 
 map.S = {
   name = "Sessions",
-  l = { function () SessionLoad(require("telescope.themes").get_dropdown({})) end, "Load" },
-  s = { SessionSave, "Save" }
+  L = { function () SessionLoad(require("telescope.themes").get_dropdown({})) end, "Load" },
+  S = { SessionSave, "Save" }
 }
 
 -- TODO

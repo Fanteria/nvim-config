@@ -39,9 +39,11 @@ o.foldenable = true
 o.smartindent = true
 o.breakindent = true -- wrapped line will continue visually indented
 o.expandtab = true
-o.showtabline = 2
+o.showtabline = 0 -- 2 to show tabline
 o.shiftwidth = 2 -- number of spaces for each indention
 o.tabstop = 2    -- insert N spaces for tab
+-- o.tabline = 0
+-- let g:airline#extensions#tabline#enabled = 0
 
 -- Search
 o.hlsearch = true

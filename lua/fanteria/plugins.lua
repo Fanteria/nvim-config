@@ -91,6 +91,7 @@ require("lazy").setup({
     'nvim-treesitter/playground',
     dependencies = "nvim-treesitter/nvim-treesitter",
   },
+  "moll/vim-bbye",
 
   -- Git
   "lewis6991/gitsigns.nvim",
@@ -101,7 +102,6 @@ require("lazy").setup({
 
   -- Visual --
   "nvim-lualine/lualine.nvim",
-  "akinsho/bufferline.nvim",
   "lukas-reineke/indent-blankline.nvim",
   {
     "kevinhwang91/nvim-ufo",
@@ -114,6 +114,13 @@ require("lazy").setup({
   "goolord/alpha-nvim",
   "ahmedkhalf/project.nvim",
 
+  -- this plugin automatically follow symlinks if are opened
+  -- I use it to auto follow from `include` directories
+  -- "aymericbeaumet/vim-symlink"
+  --
+  -- this plugin enables use buffers as tabs in ordinary editors
+  -- "akinsho/bufferline.nvim",
+  --
   -- "akinsho/toggleterm.nvim",
   -- markdown preview
   -- {
