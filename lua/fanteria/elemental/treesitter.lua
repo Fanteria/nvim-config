@@ -1,10 +1,6 @@
-local treesitter_ok, treesitter = pcall(require, "nvim-treesitter.configs")
-if not treesitter_ok then
-  print("Treesitter cannot be loaded.")
-  return
-end
+local M = {}
 
-treesitter.setup({
+M.opts = {
   ensure_installed = "all",
   ignore_install = { "" },
   highlight = {
@@ -42,4 +38,6 @@ treesitter.setup({
       show_help = '?',
     },
   }
-})
+}
+
+return M

@@ -90,12 +90,12 @@ if nvimtree_ok then
 end
 
 -- Bufferline
-local bufferline_ok, _ = pcall(require, "bufferline")
-if bufferline_ok then
-  map("n", "<S-l>", ":BufferLineCycleNext<CR>", opts)
-  map("n", "<S-h>", ":BufferLineCyclePrev<CR>", opts)
-  map("n", "<leader>c", "<cmd>bprevious <bar> bd#<CR>", opts)
-end
+-- local bufferline_ok, _ = pcall(require, "bufferline")
+-- if bufferline_ok then
+--   map("n", "<S-l>", ":BufferLineCycleNext<CR>", opts)
+--   map("n", "<S-h>", ":BufferLineCyclePrev<CR>", opts)
+-- end
+map("n", "<leader>c", "<cmd>Bdelete<CR>", opts)
 
 -- Telescope
 local telescope_ok, telescope = pcall(require, "telescope.builtin")

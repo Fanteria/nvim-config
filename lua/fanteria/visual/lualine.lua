@@ -1,10 +1,6 @@
-local lualine_ok, lualine = pcall(require, "lualine")
-if not lualine_ok then
-  print("Lualine cannot be loaded.")
-  return
-end
+local M = {}
 
-lualine.setup({
+M.opts = {
   options = {
     disabled_filetypes = { "alpha", "NvimTree" },
     theme = "auto",
@@ -32,4 +28,6 @@ lualine.setup({
       { "progress", padding = 1 }
     },
   },
-})
+}
+
+return M

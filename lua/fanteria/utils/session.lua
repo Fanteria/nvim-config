@@ -54,7 +54,7 @@ SessionLoad = function(opts)
 			prompt_title = "Sessions",
 			finder = finders.new_table({ results = names }),
 			sorter = conf.generic_sorter(opts),
-			attach_mappings = function(prompt_bufnr, map)
+			attach_mappings = function(prompt_bufnr, _)
 				actions.select_default:replace(function()
 					actions.close(prompt_bufnr)
 					local selection = action_state.get_selected_entry()[1]

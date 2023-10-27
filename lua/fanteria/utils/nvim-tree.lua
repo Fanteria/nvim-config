@@ -1,11 +1,6 @@
-local nvim_tree_ok, nvim_tree = pcall(require, "nvim-tree")
-local nvim_tree_api_ok, nvim_tree_api = pcall(require, "nvim-tree.api")
-if not nvim_tree_ok or not nvim_tree_api_ok then
-  print("Nvim tree cannot be loaded.")
-  return
-end
+local M = {}
 
-nvim_tree.setup({
+M.opts = {
   disable_netrw = true, -- completely disable vim's file explorer
   sync_root_with_cwd = true,
   diagnostics = {
@@ -33,6 +28,7 @@ nvim_tree.setup({
       return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
     end
 
+    local nvim_tree_api = require("nvim-tree.api")
     local node = nvim_tree_api.node
     local tree = nvim_tree_api.tree
     local fs = nvim_tree_api.fs
@@ -101,4 +97,6 @@ nvim_tree.setup({
     map('n', 'h', node.navigate.parent_close, opts('Close Directory'))
     map('n', 'v', node.open.vertical, opts('Open: Vertical Split'))
   end,
-})
+}
+
+return M

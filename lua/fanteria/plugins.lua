@@ -19,65 +19,89 @@ require("lazy").setup({
   -- Essential --
   {
     "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate"
+    opts = require("fanteria.elemental.treesitter").opts,
+    build = ":TSUpdate",
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
     },
+    opts = require("fanteria.elemental.treesitter-context").opts,
   },
 
   -- LSP
-  "williamboman/mason.nvim",
+  {
+    "williamboman/mason.nvim",
+    config = true,
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    dependencies =  {
+      "williamboman/mason.nvim",
+      "neovim/nvim-lspconfig",
+    },
+    opts = require("fanteria.elemental.mason").opts,
+  },
   {
     "neovim/nvim-lspconfig",
-    dependencies = {
-      "williamboman/mason-lspconfig.nvim",
-      {
-        "williamboman/mason-lspconfig.nvim",
-        dependencies = "williamboman/mason.nvim",
-      },
-    },
     version = false,
+    config = require("fanteria.elemental.lspconfig").setup,
   },
   "RRethy/vim-illuminate",
 
   -- completions
   -- TODO check validity of all completions
-  "hrsh7th/nvim-cmp",    -- The completion plugin
-  "hrsh7th/cmp-buffer",  -- buffer completions
-  "hrsh7th/cmp-path",    -- path completions
-  "hrsh7th/cmp-cmdline", -- cmdline completions
-  "hrsh7th/cmp-nvim-lsp",
+  {
+    "hrsh7th/nvim-cmp",    -- The completion plugin
+    dependencies = {
+      "L3MON4D3/LuaSnip",
+      "hrsh7th/cmp-buffer",  -- buffer completions
+      "hrsh7th/cmp-path",    -- path completions
+      "hrsh7th/cmp-cmdline", -- cmdline completions
+      "hrsh7th/cmp-nvim-lsp",
+    },
+    opts = require("fanteria.elemental.cmp").opts,
+    config = require("fanteria.elemental.cmp").setup,
+  },
 
   -- snippets
   {
     "L3MON4D3/LuaSnip",
     version = "v2.*",
-    -- build = "make install_jsregexp"
   },
 
   -- Utils --
-  "folke/which-key.nvim",
+  {
+    "folke/which-key.nvim",
+    opts = require("fanteria.utils.which-key").opts,
+    config = require("fanteria.utils.which-key").setup,
+  },
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "debugloop/telescope-undo.nvim", -- extension like undotree
     },
+    opts = require("fanteria.utils.telescope").opts,
+    config = require("fanteria.utils.telescope").setup,
   },
   "natecraddock/sessions.nvim", -- TODO Is this plugin really nessesary?
   {
     "smoka7/hop.nvim",
     version = "*",
+    config = true,
   },
-  "kyazdani42/nvim-tree.lua",     -- file system for vim
+  {
+    "kyazdani42/nvim-tree.lua",     -- file system for vim
+    opts = require("fanteria.utils.nvim-tree").opts,
+  },
   "kyazdani42/nvim-web-devicons", -- icons for nvim-tree
   {
     "danymat/neogen",
     dependencies = "nvim-treesitter/nvim-treesitter",
-    version = "*"
+    version = "*",
+    opts = require("fanteria.utils.neogen").opts,
   },
   {
     "windwp/nvim-autopairs",
@@ -86,6 +110,12 @@ require("lazy").setup({
   {
     'numToStr/Comment.nvim',
     lazy = false,
+    -- This plugin add few mappings
+    -- gcc to comment act line with line comment
+    -- gbc to comment act line with block comment
+    -- gc  to comment visual block with line comment
+    -- gb  to comment visual block with block comment
+    -- gcA to add line comment on the end of the line
   },
   {
     'nvim-treesitter/playground',
@@ -94,24 +124,42 @@ require("lazy").setup({
   "moll/vim-bbye",
 
   -- Git
-  "lewis6991/gitsigns.nvim",
+  {
+    "lewis6991/gitsigns.nvim",
+    opts = require("fanteria.visual.gitsigns").opts,
+    -- config = require("fanteria.visual.gitsigns").setup,
+  },
 
   -- Debugging
   -- "mfussenegger/nvim-dap",
   -- { "rcarriga/nvim-dap-ui", dependencies = "mfussenegger/nvim-dap" },
 
   -- Visual --
-  "nvim-lualine/lualine.nvim",
-  "lukas-reineke/indent-blankline.nvim",
+  {
+    "nvim-lualine/lualine.nvim",
+    opts = require("fanteria.visual.lualine").opts
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    opts = require("fanteria.visual.indent-blankline").opts,
+    config = require("fanteria.visual.indent-blankline").setup,
+  },
   {
     "kevinhwang91/nvim-ufo",
     dependencies = 'kevinhwang91/promise-async',
   },
   -- Colorscheme
-  "marko-cerovac/material.nvim",
+  {
+    "marko-cerovac/material.nvim",
+    opts = require("fanteria.visual.material").opts,
+    config = require("fanteria.visual.material").setup,
+  },
 
   -- Title page --
-  "goolord/alpha-nvim",
+  {
+    "goolord/alpha-nvim",
+    config = require("fanteria.title.alpha").setup,
+  },
   "ahmedkhalf/project.nvim",
 
   -- this plugin automatically follow symlinks if are opened

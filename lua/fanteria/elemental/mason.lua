@@ -1,23 +1,24 @@
-local mason_ok, mason = pcall(require, "mason")
-local mason_lspconfig_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
-local lspconfig_ok, lspconfig = pcall(require, "lspconfig")
-if not mason_ok or not mason_lspconfig_ok or not lspconfig_ok then
-  print("Mason cannot be loaded.")
-  return
-end
+local M = {}
 
-mason.setup()
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.foldingRange = {
+  dynamicRegistration = false,
+  lineFoldingOnly = true
+}
 
 local default_setup = function(server)
-  lspconfig[server].setup({})
+  require("lspconfig")[server].setup({
+    capabilities = capabilities,
+  })
 end
 
-mason_lspconfig.setup({
+M.opts = {
   ensure_installed = { "lua_ls", "clangd", "bashls", "rust_analyzer" },
   handlers = {
     default_setup,
     lua_ls = function()
-      lspconfig.lua_ls.setup({
+      require("lspconfig").lua_ls.setup({
+        capabilities = capabilities,
         settings = {
           Lua = {
             runtime = {
@@ -30,8 +31,9 @@ mason_lspconfig.setup({
         },
       })
     end,
-    clangd = function ()
-      lspconfig.clangd.setup({
+    clangd = function()
+      require("lspconfig").clangd.setup({
+        capabilities = capabilities,
         settings = {
           clangd = {
             arguments = { "--std=c++17" },
@@ -40,4 +42,6 @@ mason_lspconfig.setup({
       })
     end
   },
-})
+}
+
+return M

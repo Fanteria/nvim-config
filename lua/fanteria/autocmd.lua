@@ -30,6 +30,3 @@ vim.api.nvim_create_autocmd({"BufWinEnter"}, {
     vim.cmd("silent! loadview")
   end
 })
-
--- autocmd BufReadPre * if &ff == '' | set ff=dos | endif
--- :set fileformat?

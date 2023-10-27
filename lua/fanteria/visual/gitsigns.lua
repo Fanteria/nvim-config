@@ -1,10 +1,6 @@
-local gitsigns_ok, gitsigns = pcall(require, "gitsigns")
-if not gitsigns_ok then
-  print("Gitsigns cannot be loaded")
-  return
-end
+local M = {}
 
-gitsigns.setup({
+M.opts = {
   signs = {
     add = { text = "▎" },
     change = { text = "▎" },
@@ -12,4 +8,16 @@ gitsigns.setup({
     topdelete = { text = "" },
     changedelete = { text = "▎" },
   },
-})
+}
+
+M.setup = function(plug, opts)
+  print(vim.inspect(plug))
+  local gitsigns_ok, gitsigns = pcall(require, "gitsigns")
+  if not gitsigns_ok then
+    vim.notify(plug.name .. " cannot be loaded")
+    return
+  end
+  gitsigns.setup(opts)
+end
+
+return M

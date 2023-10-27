@@ -1,10 +1,6 @@
-local status_ok, alpha = pcall(require, "alpha")
-if not status_ok then
-	return
-end
+local M = {}
 
-local dashboard = require("alpha.themes.dashboard")
-dashboard.section.header.val = {
+local header = {
 	[[                                      ]],
 	[[ _____           _            _       ]],
 	[[|  ___|_ _ _ __ | |_ ___ _ __(_) __ _ ]],
@@ -12,6 +8,19 @@ dashboard.section.header.val = {
 	[[|  _| (_| | | | | ||  __/ |  | | (_| |]],
 	[[|_|  \__,_|_| |_|\__\___|_|  |_|\__,_|]],
 }
+
+local footer = {
+	[[Most good programmers do programming]],
+	[[not because they expect to get paid]],
+	[[or get adulation by the public, ]],
+	[[but because it is fun to program.]],
+	[[]],
+	[[ Linus Torvalds]],
+}
+
+M.setup = function(_, _)
+local dashboard = require("alpha.themes.dashboard")
+dashboard.section.header.val = header
 
 dashboard.section.buttons.val = {
 	{ type = "padding", val = 1 },
@@ -24,17 +33,11 @@ dashboard.section.buttons.val = {
 	{ type = "padding", val = 3 },
 }
 
-dashboard.section.footer.val = {
-	[[Most good programmers do programming]],
-	[[not because they expect to get paid]],
-	[[or get adulation by the public, ]],
-	[[but because it is fun to program.]],
-	[[]],
-	[[ Linus Torvalds]],
-}
+dashboard.section.footer.val = footer
 
 dashboard.section.header.opts.hl = "Include"
-
 dashboard.opts.opts.noautocmd = true
+require("alpha").setup(dashboard.config)
+end
 
-alpha.setup(dashboard.config)
+return M

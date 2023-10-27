@@ -1,15 +1,6 @@
-local material_ok, material = pcall(require, "material")
-if not material_ok then
-  vim.cmd("colorscheme default")
-  print("Material colorscheme cannot be loaded.")
-  return
-end
+local M = {}
 
-local c = require("material.colors")
-
-vim.g.material_style = "darker"
-
-material.setup({
+M.opts = {
   contrast = {
     cursor_line = true,
   },
@@ -33,8 +24,23 @@ material.setup({
     darker = true,
   },
   async_loading = true,
-  custom_highlights = {
+  custom_colors = function(colors)
+    if vim.g.material_style == "darker" then
+      colors.editor.bg                       = "#18151a"
+      colors.editor.bg_alt                   = "#18151a"
+      colors.backgrounds.sidebars            = colors.editor.bg
+      colors.backgrounds.floating_windows    = "#141821"
+      colors.backgrounds.non_current_windows = colors.editor.bg
+    end
+    colors.syntax.type = colors.main.yellow
+    colors.syntax.operator = colors.main.red
 
+    colors.git.added = colors.main.green
+  end,
+}
+
+M.custom_highlights = function(c)
+  return {
     ["@variable.builtin"]      = { fg = c.main.orange },
     ["@property"]              = { fg = c.main.paleblue },
     ["@parameter"]             = { fg = c.editor.fg },
@@ -49,21 +55,22 @@ material.setup({
     ["@punctuation.bracket"]   = { fg = c.editor.fg },
 
     ["@constant"]              = { fg = c.main.yellow },
+  }
+end
 
-  },
-  custom_colors = function(colors)
-    if vim.g.material_style == "darker" then
-      colors.editor.bg                       = "#18151a"
-      colors.editor.bg_alt                   = "#18151a"
-      colors.backgrounds.sidebars            = colors.editor.bg
-      colors.backgrounds.floating_windows    = "#141821"
-      colors.backgrounds.non_current_windows = colors.editor.bg
-    end
-    colors.syntax.type = colors.main.yellow
-    colors.syntax.operator = colors.main.red
+M.setup = function (_, opts)
+  local material_ok, material = pcall(require, "material")
+  if not material_ok then
+    vim.cmd("colorscheme default")
+    vim.notify("Material colorscheme cannot be loaded.")
+    return
+  end
 
-    colors.git.added = colors.main.green
-  end,
-})
+  vim.g.material_style = "darker"
+  opts.custom_highlights = M.custom_highlights(require("material.colors"))
+  material.setup(opts)
 
-vim.cmd("colorscheme material")
+  vim.cmd("colorscheme material")
+end
+
+return M

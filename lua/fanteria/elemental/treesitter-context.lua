@@ -1,9 +1,8 @@
-local treesitter_context_ok, treesitter_context = pcall(require, "treesitter-context")
-if not treesitter_context_ok then
-  return
-end
+local M = {}
 
-treesitter_context.setup({
+M.opts = {
   enable = true,
   multiline_threshold = 7,
-})
+}
+
+return M
