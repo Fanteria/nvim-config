@@ -93,10 +93,13 @@ require("lazy").setup({
     config = true,
   },
   {
-    "kyazdani42/nvim-tree.lua",     -- file system for vim
+    "kyazdani42/nvim-tree.lua", -- file system for vim
     opts = require("fanteria.utils.nvim-tree").opts,
   },
-  "kyazdani42/nvim-web-devicons", -- icons for nvim-tree
+  {
+    "kyazdani42/nvim-web-devicons", -- icons for nvim-tree
+    opts = require("fanteria.visual.web-devicons").opts
+  },
   {
     "danymat/neogen",
     dependencies = "nvim-treesitter/nvim-treesitter",
