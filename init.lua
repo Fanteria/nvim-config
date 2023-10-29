@@ -1,7 +1,5 @@
 require("fanteria.plugins")
 
-require("fanteria.utils.session")
-
 require("fanteria.title.alpha")
 
 require("fanteria.options")

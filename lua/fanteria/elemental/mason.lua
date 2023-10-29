@@ -31,16 +31,6 @@ M.opts = {
         },
       })
     end,
-    clangd = function()
-      require("lspconfig").clangd.setup({
-        capabilities = capabilities,
-        settings = {
-          clangd = {
-            arguments = { "--std=c++17" },
-          },
-        },
-      })
-    end
   },
 }
 

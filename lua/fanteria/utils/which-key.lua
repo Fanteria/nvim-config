@@ -63,8 +63,10 @@ M.get_mappings = function()
 
   map.S = {
     name = "Sessions",
-    L = { function() SessionLoad(require("telescope.themes").get_dropdown({})) end, "Load" },
-    S = { SessionSave, "Save" }
+    L = { function()
+      require("fanteria.session").load(require("telescope.themes").get_dropdown({}))
+    end, "Load" },
+    S = { require("fanteria.session").save, "Save" }
   }
 
   map.W = { require("fanteria.visual.indent-blankline").toggle_whitespaces, "Toggle whitespaces" }

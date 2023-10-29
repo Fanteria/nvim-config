@@ -27,7 +27,7 @@ dashboard.section.buttons.val = {
 	dashboard.button("n", "  New file", ":ene <BAR> startinsert <CR>"),
 	dashboard.button("f", "󱪝  Open file", ":Telescope find_files <CR>"),
 	dashboard.button("p", "  Open project", ":Telescope projects <CR>"),
-  dashboard.button("s", "  Open session", ":lua SessionLoad() <CR>"),
+  dashboard.button("s", "  Open session", ":lua require('fanteria.session').load() <CR>"),
 	dashboard.button("r", "󱋡  Recently used files", ":Telescope oldfiles <CR>"),
 	dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
 	{ type = "padding", val = 3 },

@@ -101,7 +101,7 @@ map("n", "<leader>c", "<cmd>Bdelete<CR>", opts)
 local telescope_ok, telescope = pcall(require, "telescope.builtin")
 local telescope_theme_ok, telescope_theme = pcall(require, "telescope.themes")
 if telescope_ok and telescope_theme_ok then
-  map("n", "<leader>F", telescope.live_grep, opts) -- TODO show text on half screen too
+  map("n", "<leader>F", telescope.live_grep, opts)
   map("n", "<C-p>", telescope.find_files, opts)
   map("n", "<C-b>", function()
     telescope.buffers(telescope_theme.get_dropdown({ previewer = false }))

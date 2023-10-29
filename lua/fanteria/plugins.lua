@@ -37,7 +37,7 @@ require("lazy").setup({
   },
   {
     "williamboman/mason-lspconfig.nvim",
-    dependencies =  {
+    dependencies = {
       "williamboman/mason.nvim",
       "neovim/nvim-lspconfig",
     },
@@ -51,9 +51,8 @@ require("lazy").setup({
   "RRethy/vim-illuminate",
 
   -- completions
-  -- TODO check validity of all completions
   {
-    "hrsh7th/nvim-cmp",    -- The completion plugin
+    "hrsh7th/nvim-cmp", -- The completion plugin
     dependencies = {
       "L3MON4D3/LuaSnip",
       "hrsh7th/cmp-buffer",  -- buffer completions
@@ -86,7 +85,6 @@ require("lazy").setup({
     opts = require("fanteria.utils.telescope").opts,
     config = require("fanteria.utils.telescope").setup,
   },
-  "natecraddock/sessions.nvim", -- TODO Is this plugin really nessesary?
   {
     "smoka7/hop.nvim",
     version = "*",
@@ -113,6 +111,7 @@ require("lazy").setup({
   {
     'numToStr/Comment.nvim',
     lazy = false,
+    config = true,
     -- This plugin add few mappings
     -- gcc to comment act line with line comment
     -- gbc to comment act line with block comment
