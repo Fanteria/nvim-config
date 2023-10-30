@@ -30,14 +30,17 @@ M.get_mappings = function()
       u = { gitsigns.undo_stage_hunk, "Undo Stage Hunk" },
       U = { gitsigns.undo_stage_buffer, "Undo Stage Buffer" },
       o = { telescope.git_status, "Open changed file" },
-      b = { telescope.git_branches, "Checkout branch" },
+      b = { function()
+        telescope.git_branches({ show_remote_tracking_branches = false })
+      end, "Checkout branch" },
+      B = { telescope.git_branches, "Checkout branch with remote" },
       c = { telescope.git_commits, "Checkout commit" },
       d = { gitsigns.diffthis, "Diff" },
     }
   end
 
   map.u = { function()
-    telescope.extensions.undo.undo()
+    require"telescope".extensions.undo.undo()
     local keys = vim.api.nvim_replace_termcodes('<ESC>', true, false, true)
     vim.api.nvim_feedkeys(keys, 'm', false)
   end, "Undotree" }

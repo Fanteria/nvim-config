@@ -8,9 +8,6 @@ M.opts = {
     sorting_strategy = "ascending",
     layout_strategy = "flex",
     -- borderchars = {" ", " ", " ", " ", " ", " ", " ", " "},
-    -- layout_strategy = function ()
-    --   return require("telescope.layout").horizontal()
-    -- end,
     layout_config = {
       horizontal = {
         prompt_position = "top",
