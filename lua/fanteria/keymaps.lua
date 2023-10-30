@@ -62,7 +62,9 @@ map("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 map("n", "<leader>tn", ":tabnew %<CR>", opts)
 map("n", "<leader>tc", ":tabclose<CR>", opts)
 map("n", "<leader>tl", ":tabnext<CR>", opts)
+map("n", "<S-l>", ":tabnext<CR>", opts)
 map("n", "<leader>th", ":tabprev<CR>", opts)
+map("n", "<S-h>", ":tabprev<CR>", opts)
 
 -- Tab numbers mappings for czech keyboard
 map("n", "<leader>t+", "1gt", opts)
@@ -95,6 +97,8 @@ end
 --   map("n", "<S-l>", ":BufferLineCycleNext<CR>", opts)
 --   map("n", "<S-h>", ":BufferLineCyclePrev<CR>", opts)
 -- end
+map("n", "<C-l>", "<cmd>bn<CR>", opts)
+map("n", "<C-h>", "<cmd>bp<CR>", opts)
 map("n", "<leader>c", "<cmd>Bdelete<CR>", opts)
 
 -- Telescope
