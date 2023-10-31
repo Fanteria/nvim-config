@@ -1,8 +1,8 @@
 local M = {}
 
-M.get_loaded_bufs = function()
+M.get_bufs = function()
   local loaded = {}
-  for _, buf in ipairs(vim.split(vim.fn.execute("buffers"), "\n")) do
+  for _, buf in pairs(vim.split(vim.fn.execute("buffers"), "\n")) do
     if string.len(buf) ~= 0 then
       loaded[tonumber(string.match(buf, "%d+"))] = buf
     end
@@ -12,16 +12,15 @@ end
 
 M.get_open_bufs = function()
   local aux = {}
-  for _, win in ipairs(vim.api.nvim_list_wins()) do
-    aux[vim.api.nvim_win_get_buf(win)] = true
+  for _, win in pairs(vim.api.nvim_list_wins()) do
+    aux[vim.api.nvim_win_get_buf(win)] = "A"
   end
   return aux
 end
 
 M.close_not_open_bufs = function()
   local open = M.get_open_bufs()
-  for bufnr, _ in ipairs(M.get_loaded_bufs()) do
-    print(open[bufnr])
+  for bufnr, _ in pairs(M.get_bufs()) do
     if not open[bufnr] then
       vim.cmd("Bdelete " .. bufnr)
     end
