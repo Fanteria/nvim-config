@@ -59,12 +59,20 @@ map("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 map("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -- Tabs --
+local telescope_theme_ok, telescope_theme = pcall(require, "telescope.themes")
+if telescope_theme_ok then
+  map("n", "<C-t>", function()
+    require("fanteria.functions").telescope_buffers_in_tabs(telescope_theme.get_dropdown({ previewer = false }))
+  end, opts)
+end
+-- telescope.buffers(telescope_theme.get_dropdown({ previewer = false }))
 map("n", "<leader>tn", ":tabnew %<CR>", opts)
-map("n", "<leader>tc", ":tabclose<CR>", opts)
+map("n", "<leader>tc", vim.cmd.tabclose, opts)
+map("n", "<leader>tC", require("fanteria.functions").close_not_open_bufs, opts)
 map("n", "<leader>tl", ":tabm +1<CR>", opts)
 map("n", "<leader>th", ":tabm -1<CR>", opts)
-map("n", "<S-l>", ":tabnext<CR>", opts)
-map("n", "<S-h>", ":tabprev<CR>", opts)
+map("n", "<S-l>", vim.cmd.tabnext, opts)
+map("n", "<S-h>", vim.cmd.tabprev, opts)
 
 -- Tab numbers mappings for czech keyboard
 map("n", "<leader>t+", "1gt", opts)
@@ -103,7 +111,7 @@ map("n", "<leader>c", "<cmd>Bdelete<CR>", opts)
 
 -- Telescope
 local telescope_ok, telescope = pcall(require, "telescope.builtin")
-local telescope_theme_ok, telescope_theme = pcall(require, "telescope.themes")
+-- local telescope_theme_ok, telescope_theme = pcall(require, "telescope.themes")
 if telescope_ok and telescope_theme_ok then
   map("n", "<leader>F", telescope.live_grep, opts)
   map("n", "<C-p>", telescope.find_files, opts)

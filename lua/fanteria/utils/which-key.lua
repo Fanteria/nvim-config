@@ -72,7 +72,13 @@ M.get_mappings = function()
         session.load(require("telescope.themes").get_dropdown({}))
       end, "Load" },
       S = { session.save, "Save" },
-      A = { function() vim.notify(session.actual_session) end, "Actual session" },
+      A = { function() 
+        local act = session.actual_session
+        if act == "" then
+          act = "There is no active session"
+        end
+        vim.notify(act)
+      end, "Actual session" },
     }
   end
 
