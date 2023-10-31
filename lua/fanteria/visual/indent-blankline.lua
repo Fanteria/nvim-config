@@ -4,7 +4,6 @@ M.enabled = true
 
 M.toggle_whitespaces = function()
   local ibl = require("ibl")
-  print(vim.inspect(ibl.config))
   if M.enabled then
     ibl.update({ enabled = false })
     vim.cmd("tabdo windo set list")
