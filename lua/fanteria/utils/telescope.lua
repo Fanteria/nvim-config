@@ -27,7 +27,7 @@ M.setup = function(_, opts)
   local telescope = require("telescope")
   local actions = require("telescope.actions")
 
-  opts.mappings = {
+  opts.defaults.mappings = {
     i = {
       ["<Tab>"] = actions.move_selection_next,
       ["<S-Tab>"] = actions.move_selection_previous,
