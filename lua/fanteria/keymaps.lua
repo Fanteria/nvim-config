@@ -61,9 +61,9 @@ map("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 -- Tabs --
 map("n", "<leader>tn", ":tabnew %<CR>", opts)
 map("n", "<leader>tc", ":tabclose<CR>", opts)
-map("n", "<leader>tl", ":tabnext<CR>", opts)
+map("n", "<leader>tl", ":tabm +1<CR>", opts)
+map("n", "<leader>th", ":tabm -1<CR>", opts)
 map("n", "<S-l>", ":tabnext<CR>", opts)
-map("n", "<leader>th", ":tabprev<CR>", opts)
 map("n", "<S-h>", ":tabprev<CR>", opts)
 
 -- Tab numbers mappings for czech keyboard
