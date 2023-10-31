@@ -42,9 +42,9 @@ M.setup = function(_, opts)
 
   opts.extensions = {
     undo = {
-      use_delta = true,
+      use_delta = false,
       diff_context_lines = 30,
-      side_by_side = true,
+      -- side_by_side = true,
       layout_strategy = "vertical",
       layout_config = {
         preview_height = 0.7,
