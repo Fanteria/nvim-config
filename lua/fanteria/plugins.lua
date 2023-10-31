@@ -107,6 +107,8 @@ require("lazy").setup({
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
+    opts = require("fanteria.utils.autopairs").opts,
+    config = require("fanteria.utils.autopairs").setup,
   },
   {
     'numToStr/Comment.nvim',

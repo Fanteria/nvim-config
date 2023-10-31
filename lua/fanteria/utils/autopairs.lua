@@ -1,18 +1,15 @@
-local autopairs_ok, autopairs = pcall(require, "nvim-autopairs")
-if not autopairs_ok then
-  print("Autopairs cannot be loaded.")
-	return
-end
+local M = {}
 
-autopairs.setup({
+M.opts = {
 	check_ts = true,
-})
+}
 
--- TODO somehow solve dependency
--- register to cmp
-local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-local cmp_status_ok, cmp = pcall(require, "cmp")
-if not cmp_status_ok then
-	return
+M.setup = function(_, opts)
+  require("nvim-autopairs").setup(opts)
+
+  local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+  local cmp = require("cmp")
+  cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 end
-cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+
+return M
