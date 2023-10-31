@@ -40,7 +40,7 @@ M.get_mappings = function()
   end
 
   map.u = { function()
-    require"telescope".extensions.undo.undo()
+    require "telescope".extensions.undo.undo()
     local keys = vim.api.nvim_replace_termcodes('<ESC>', true, false, true)
     vim.api.nvim_feedkeys(keys, 'm', false)
   end, "Undotree" }
@@ -64,13 +64,17 @@ M.get_mappings = function()
 
   map.O = { "<cmd>execute '!xdg-open' shellescape(expand('<cfile>', 1))<CR>", "Open path" }
 
-  map.S = {
-    name = "Sessions",
-    L = { function()
-      require("fanteria.session").load(require("telescope.themes").get_dropdown({}))
-    end, "Load" },
-    S = { require("fanteria.session").save, "Save" }
-  }
+  local session_ok, session = pcall(require, "fanteria.session")
+  if session_ok then
+    map.S = {
+      name = "Sessions",
+      L = { function()
+        session.load(require("telescope.themes").get_dropdown({}))
+      end, "Load" },
+      S = { session.save, "Save" },
+      A = { function() vim.notify(session.actual_session) end, "Actual session" },
+    }
+  end
 
   map.W = { require("fanteria.visual.indent-blankline").toggle_whitespaces, "Toggle whitespaces" }
 
