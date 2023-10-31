@@ -8,7 +8,8 @@ M.opts = {
     section_separators = { left = '', right = '' },
   },
   sections = {
-    lualine_b = { { "branch", icon = "" }, "diagnostics" },
+    lualine_b = { "filename", "diagnostics" },
+    lualine_c = { { "branch", icon = "" } },
     lualine_x = {
       { "diff", symbols = { added = " ", modified = " ", removed = " " } },
       {
