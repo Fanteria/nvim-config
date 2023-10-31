@@ -42,6 +42,13 @@ M.setup = function(_, opts)
 
   opts.extensions = {
     undo = {
+      use_delta = true,
+      diff_context_lines = 30,
+      side_by_side = true,
+      layout_strategy = "vertical",
+      layout_config = {
+        preview_height = 0.7,
+      },
       mappings = {
         i = {
           ["yy"] = require("telescope-undo.actions").yank_additions,
@@ -57,13 +64,13 @@ M.setup = function(_, opts)
     },
   }
 
+  telescope.setup(opts)
+
   telescope.load_extension("undo")
   require("project_nvim").setup({
     detection_methods = { "pattern" },
   })
   telescope.load_extension('projects')
-
-  telescope.setup(opts)
 end
 
 return M
