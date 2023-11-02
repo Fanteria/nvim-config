@@ -138,6 +138,22 @@ require("lazy").setup({
   -- "mfussenegger/nvim-dap",
   -- { "rcarriga/nvim-dap-ui", dependencies = "mfussenegger/nvim-dap" },
 
+  -- Code coverage
+  {
+    "andythigpen/nvim-coverage",
+    dependencies = "nvim-lua/plenary.nvim",
+    config = function()
+      require("coverage").setup({
+
+        lang = {
+          rust = {
+            coverage_command = "grcov ${cwd} -s ${cwd} --binary-path ./target/debug/ -t coveralls --branch --ignore-not-existing --token NO_TOKEN --llvm-path /usr/bin"
+          },
+        },
+      })
+    end,
+  },
+
   -- Visual --
   {
     "nvim-lualine/lualine.nvim",
