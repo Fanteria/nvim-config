@@ -36,6 +36,12 @@ M.get_mappings = function()
       B = { telescope.git_branches, "Checkout branch with remote" },
       c = { telescope.git_commits, "Checkout commit" },
       d = { gitsigns.diffthis, "Diff" },
+      D = { function ()
+        vim.cmd("Gvdiffsplit " .. vim.fn.input("Enter branch to diff: "))
+      end, "Diff branch" },
+      m = { "<cmd>vertical Git<CR>", "Git status vertical" },
+      M = { "<cmd>Git<CR>", "Git status horizontal" },
+      L = { "<cmd>Git log<CR>", "Git log" },
     }
   end
 
