@@ -53,6 +53,11 @@ M.get_mappings = function()
 
   map.y = { '<cmd>let @+ = expand("%:p")<CR>', "Yank buffer path" }
 
+  local dap_ok, dap = pcall(require, "dap")
+  if dap_ok then
+    map.B = { dap.toggle_breakpoint, "Toggle breakpoint" }
+  end
+
   local coverage_ok, coverage = pcall(require, "coverage")
   if coverage_ok then
     map.C = {
@@ -64,6 +69,8 @@ M.get_mappings = function()
       T = { coverage.toggle, "Toggle" },
     }
   end
+
+  map.D = { require("fanteria.utils.dapui").toggle_dap_ui, "Toggle debugger" }
 
   map.L = {
     name = "LSP",

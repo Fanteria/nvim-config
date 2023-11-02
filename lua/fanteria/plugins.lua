@@ -136,8 +136,15 @@ require("lazy").setup({
   "tpope/vim-fugitive",
 
   -- Debugging
-  -- "mfussenegger/nvim-dap",
-  -- { "rcarriga/nvim-dap-ui", dependencies = "mfussenegger/nvim-dap" },
+  {
+    "mfussenegger/nvim-dap",
+    config = require("fanteria.utils.dap").setup,
+  },
+  {
+    "rcarriga/nvim-dap-ui",
+    dependencies = "mfussenegger/nvim-dap",
+    config = require("fanteria.utils.dapui").setup,
+  },
 
   -- Code coverage
   {
