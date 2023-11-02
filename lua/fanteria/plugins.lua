@@ -143,15 +143,7 @@ require("lazy").setup({
   {
     "andythigpen/nvim-coverage",
     dependencies = "nvim-lua/plenary.nvim",
-    config = function()
-      require("coverage").setup({
-        lang = {
-          rust = {
-            coverage_command = "grcov ${cwd} -s ${cwd} --binary-path ./target/debug/ -t coveralls --branch --ignore-not-existing --token NO_TOKEN --llvm-path /usr/bin"
-          },
-        },
-      })
-    end,
+    opts = require("fanteria.utils.nvim-coverage").opts,
   },
 
   -- Visual --

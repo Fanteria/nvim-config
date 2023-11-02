@@ -47,6 +47,18 @@ M.get_mappings = function()
 
   map.y = { '<cmd>let @+ = expand("%:p")<CR>', "Yank buffer path" }
 
+  local coverage_ok, coverage = pcall(require, "coverage")
+  if coverage_ok then
+    map.C = {
+      A = { coverage.summary, "All" },
+      C = { coverage.clear, "Clear" },
+      H = { coverage.hide, "Hide" },
+      L = { function() coverage.load(true) end, "Load" },
+      S = { coverage.show, "Show" },
+      T = { coverage.toggle, "Toggle" },
+    }
+  end
+
   map.L = {
     name = "LSP",
     d = { telescope.diagnostics, "Diagnostics" },
@@ -72,7 +84,7 @@ M.get_mappings = function()
         session.load(require("telescope.themes").get_dropdown({}))
       end, "Load" },
       S = { session.save, "Save" },
-      A = { function() 
+      A = { function()
         local act = session.actual_session
         if act == "" then
           act = "There is no active session"
