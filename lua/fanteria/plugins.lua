@@ -133,6 +133,7 @@ require("lazy").setup({
     opts = require("fanteria.visual.gitsigns").opts,
     -- config = require("fanteria.visual.gitsigns").setup,
   },
+  "tpope/vim-fugitive",
 
   -- Debugging
   -- "mfussenegger/nvim-dap",
@@ -144,7 +145,6 @@ require("lazy").setup({
     dependencies = "nvim-lua/plenary.nvim",
     config = function()
       require("coverage").setup({
-
         lang = {
           rust = {
             coverage_command = "grcov ${cwd} -s ${cwd} --binary-path ./target/debug/ -t coveralls --branch --ignore-not-existing --token NO_TOKEN --llvm-path /usr/bin"
