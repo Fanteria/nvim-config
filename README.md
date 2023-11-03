@@ -20,6 +20,7 @@ To install an additional spell check language, follow these steps:
 2. Restart Neovim to automatically install new language.
 3. After successfully installing the additional spell check language, revert the changes in the `nvim-tree.lua` configuration file.
 4. Again restart Neovim.
+5. Run `checkhealth` command and check if there is some errors. TODO
 
 ## Plugins
 
@@ -61,14 +62,17 @@ To install an additional spell check language, follow these steps:
 - [Comment.nvim](https://github.com/numToStr/Comment.nvim): Enhanced code commenting support.
 - [Treesitter Playground](https://github.com/nvim-treesitter/playground): Provides a amazing playground for Treesitter.
 - [Vim-bbye](https://github.com/moll/vim-bbye): A plugin to delete buffers.
+- [Coverage](https://github.com/andythigpen/nvim-coverage) TODO
 
-##### Git Signs
+##### Git
 
-[Gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) enhances my Git integration in Neovim by providing Git status indicators.
+- [Gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) enhances my Git integration in Neovim by providing Git status indicators.
+- [Fugitive](https://github.com/tpope/vim-fugitive) TODO
 
 ### Debugging
 
-TODO: Information about debugging will be added soon.
+- [Nvim-dap](https://github.com/mfussenegger/nvim-dap) TODO
+- [Nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui) TODO
 
 ### Visual
 
