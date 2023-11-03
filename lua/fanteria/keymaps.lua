@@ -20,8 +20,8 @@ map("n", "m", "`", opts)
 
 -- Basics --
 map("n", "<leader>w", "<cmd>w!<CR>", opts)
-map("n", "<leader>q", "<cmd>q!<CR>", opts)
-map("n", "<leader>Q", "<cmd>qa!<CR>", opts)
+map("n", "<leader>q", "<cmd>wq<CR>", opts)
+map("n", "<leader>Q", "<cmd>wqa!<CR>", opts)
 -- hide highlight
 map("n", "<leader>H", "<cmd>nohlsearch<CR>", opts)
 
