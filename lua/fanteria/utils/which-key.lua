@@ -46,7 +46,7 @@ M.get_mappings = function()
   end
 
   map.u = { function()
-    require "telescope".extensions.undo.undo()
+    require("telescope").extensions.undo.undo()
     local keys = vim.api.nvim_replace_termcodes('<ESC>', true, false, true)
     vim.api.nvim_feedkeys(keys, 'm', false)
   end, "Undotree" }
