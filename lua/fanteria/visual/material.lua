@@ -32,6 +32,9 @@ M.opts = {
       colors.backgrounds.floating_windows    = "#141821"
       colors.backgrounds.non_current_windows = colors.editor.bg
     end
+    vim.api.nvim_set_hl(0, "IlluminatedWordText", { underdouble = true })
+    vim.api.nvim_set_hl(0, "IlluminatedWordRead", { underline = true })
+    vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { underline = true })
     colors.syntax.type = colors.main.yellow
     colors.syntax.operator = colors.main.red
 
