@@ -7,7 +7,7 @@ M.opts = {
   plugins = {
     "gitsigns",
     "indent-blankline",
-    "illuminate", -- TODO how to separate visual from illuminated
+    -- "illuminate",
     "nvim-cmp",
     "nvim-tree",
     -- "nvim-web-devicons",

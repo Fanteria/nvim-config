@@ -48,7 +48,6 @@ require("lazy").setup({
     version = false,
     config = require("fanteria.elemental.lspconfig").setup,
   },
-  "RRethy/vim-illuminate",
 
   -- completions
   {
@@ -154,6 +153,7 @@ require("lazy").setup({
   },
 
   -- Visual --
+  "RRethy/vim-illuminate",
   {
     "nvim-lualine/lualine.nvim",
     opts = require("fanteria.visual.lualine").opts
