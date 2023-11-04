@@ -43,22 +43,31 @@ M.opts = {
 }
 
 M.custom_highlights = function(c)
-  return {
-    ["@variable.builtin"]      = { fg = c.main.orange },
-    ["@property"]              = { fg = c.main.paleblue },
-    ["@parameter"]             = { fg = c.editor.fg },
+  local h = {}
 
-    ["@type.qualifier"]        = { fg = c.main.orange }, -- public and const keywords
+  h.Structure = { fg = c.main.purple }
+  h.Statement = { fg = c.main.purple }
 
-    ["@keyword"]               = { fg = c.main.purple },
-    ["@namespace"]             = { fg = c.main.paleblue },
-    ["@string.escape"]         = { fg = c.main.orange },
+  h["@property"]              = { fg = c.main.paleblue }
+  h["@namespace"]             = { fg = c.main.paleblue }
+  h["@keyword"]               = { fg = c.main.purple }
 
-    ["@punctuation.delimiter"] = { fg = c.editor.fg },
-    ["@punctuation.bracket"]   = { fg = c.editor.fg },
+  -- doxygen
+  h.doxygenSpecial = { link = "Comment" }
+  h.doxygenParamName = { link = "Identifier" }
+  h.doxygenSpecialMultilineDesc = { link = "Comment" }
 
-    ["@constant"]              = { fg = c.main.yellow },
-  }
+  -- C++
+  h.cppStatement = { fg = c.main.purple }
+  h.cppModifier = { fg = c.main.orange }
+  h["@lsp.type.operator.cpp"] = {}
+
+  -- Rust
+  h.rustSelf = { fg = c.main.orange }
+  h["@lsp.type.selfKeyword.rust"] = { link = "rustSelf" }
+  h["@lsp.type.struct.rust"] = { link = "@type"}
+
+  return h
 end
 
 M.setup = function (_, opts)
@@ -70,7 +79,9 @@ M.setup = function (_, opts)
   end
 
   vim.g.material_style = "darker"
-  opts.custom_highlights = M.custom_highlights(require("material.colors"))
+  local colors = require("material.colors")
+  opts.custom_highlights = M.custom_highlights(colors)
+  -- print(vim.inspect(opts))
   material.setup(opts)
 
   vim.cmd("colorscheme material")
