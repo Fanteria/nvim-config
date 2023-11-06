@@ -53,6 +53,9 @@ M.custom_highlights = function(c)
   h["@namespace"]             = { fg = c.main.paleblue }
   h["@keyword"]               = { fg = c.main.purple }
 
+  -- luasnip
+  h.DiagnosticHin = { fg = c.main.cyan }
+
   -- doxygen
   h.doxygenBrief = { fg = c.main.cyan }
   h.doxygenSpecial = { link = "Comment" }
