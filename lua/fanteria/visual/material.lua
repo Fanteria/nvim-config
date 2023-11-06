@@ -47,12 +47,14 @@ M.custom_highlights = function(c)
 
   h.Structure = { fg = c.main.purple }
   h.Statement = { fg = c.main.purple }
+  h.StorageClass = { fg = c.main.purple }
 
   h["@property"]              = { fg = c.main.paleblue }
   h["@namespace"]             = { fg = c.main.paleblue }
   h["@keyword"]               = { fg = c.main.purple }
 
   -- doxygen
+  h.doxygenBrief = { fg = c.main.cyan }
   h.doxygenSpecial = { link = "Comment" }
   h.doxygenParamName = { link = "Identifier" }
   h.doxygenSpecialMultilineDesc = { link = "Comment" }
