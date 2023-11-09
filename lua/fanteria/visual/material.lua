@@ -54,7 +54,7 @@ M.custom_highlights = function(c)
   h["@keyword"]               = { fg = c.main.purple }
 
   -- luasnip
-  h.DiagnosticHin = { fg = c.main.cyan }
+  h.DiagnosticHint = { fg = c.main.cyan }
 
   -- doxygen
   h.doxygenBrief = { fg = c.main.cyan }
