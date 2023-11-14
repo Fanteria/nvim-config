@@ -163,6 +163,8 @@ map("v", "<", "<gv", opts)
 map("v", ">", ">gv", opts)
 map("v", "p", '"_dP', opts)
 
+map("n", "gqq", "gggqG", opts)
+
 map({ "n", "v" }, "<leader>f", function()
   vim.lsp.buf.format({ async = true })
 end, opts)
