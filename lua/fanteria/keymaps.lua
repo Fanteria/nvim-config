@@ -20,13 +20,7 @@ map("n", "m", "`", opts)
 
 -- Basics --
 map("n", "<leader>w", "<cmd>w!<CR>", opts)
-map("n", "<leader>q", function ()
-  if vim.opt.modifiable._value then
-    vim.cmd("wq")
-  else
-    vim.cmd("q")
-  end
-end, opts)
+map("n", "<leader>q", "<cmd>q!<CR>", opts)
 map("n", "<leader>Q", "<cmd>wqa<CR>", opts)
 -- hide highlight
 map("n", "<leader>H", "<cmd>nohlsearch<CR>", opts)
