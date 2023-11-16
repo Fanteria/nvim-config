@@ -122,8 +122,8 @@ end
 
 -- Switch source and header
 map("n", "gh", "<cmd>ClangdSwitchSourceHeader<cr>", opts)
-map("n", "gsh", "<cmd>split | ClangdSwitchSourceHeader<cr>", opts)
-map("n", "gvh", "<cmd>vsplit | ClangdSwitchSourceHeader<cr>", opts)
+map("n", "gSh", "<cmd>split | ClangdSwitchSourceHeader<cr>", opts)
+map("n", "gsh", "<cmd>vsplit | ClangdSwitchSourceHeader<cr>", opts)
 
 -- Hop
 local hop_ok, hop = pcall(require, "hop")

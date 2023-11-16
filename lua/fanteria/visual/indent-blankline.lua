@@ -4,6 +4,7 @@ M.enabled = true
 
 M.toggle_whitespaces = function()
   local ibl = require("ibl")
+  local tabpage = vim.api.nvim_get_current_tabpage()
   if M.enabled then
     ibl.update({ enabled = false })
     vim.cmd("tabdo windo set list")
@@ -11,6 +12,7 @@ M.toggle_whitespaces = function()
     ibl.update({ enabled = true })
     vim.cmd("tabdo windo set nolist")
   end
+  vim.api.nvim_set_current_tabpage(tabpage)
   M.enabled = not M.enabled
 end
 
