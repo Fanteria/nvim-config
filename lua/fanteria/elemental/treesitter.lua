@@ -5,7 +5,7 @@ M.opts = {
   ignore_install = { "" },
   highlight = {
     enable = true,
-    disable = "",
+    disable = { "" },
   },
   incremental_celection = {
     enable = false,
@@ -23,7 +23,7 @@ M.opts = {
   },
   playground = {
     enable = true,
-    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+    updatetime = 25,         -- Debounced time for highlighting nodes in the playground from source code
     persist_queries = false, -- Whether the query persists across vim sessions
     keybindings = {
       toggle_query_editor = 'o',

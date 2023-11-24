@@ -21,6 +21,7 @@ require("lazy").setup({
     "nvim-treesitter/nvim-treesitter",
     opts = require("fanteria.elemental.treesitter").opts,
     build = ":TSUpdate",
+    main = "nvim-treesitter.configs",
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
@@ -161,7 +162,7 @@ require("lazy").setup({
   {
     "lukas-reineke/indent-blankline.nvim",
     opts = require("fanteria.visual.indent-blankline").opts,
-    config = require("fanteria.visual.indent-blankline").setup,
+    main = "ibl",
   },
   {
     "kevinhwang91/nvim-ufo",

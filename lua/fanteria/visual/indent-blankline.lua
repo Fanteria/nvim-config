@@ -45,8 +45,4 @@ M.opts = {
   },
 }
 
-M.setup = function(_, opts)
-  require("ibl").setup(opts)
-end
-
 return M
