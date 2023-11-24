@@ -159,9 +159,13 @@ map("v", "p", '"_dP', opts)
 
 map("n", "gqq", "gggqG", opts)
 
-map({ "n", "v" }, "<leader>f", function()
-  vim.lsp.buf.format({ async = true })
-end, opts)
+local conform_ok, conform = pcall(require, "conform")
+if conform_ok then
+  map({ "n", "v", "x" }, "<leader>f", function()
+    conform.format({ async = true, lsp_fallback = true })
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<ESC>", true, true, true), "n", true)
+  end, opts)
+end
 
 -----------------
 -- Visual block mode --
