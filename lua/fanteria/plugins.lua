@@ -49,6 +49,10 @@ require("lazy").setup({
     version = false,
     config = require("fanteria.elemental.lspconfig").setup,
   },
+  {
+    'stevearc/conform.nvim',
+    opts = require("fanteria.elemental.conform").opts,
+  },
 
   -- completions
   {
