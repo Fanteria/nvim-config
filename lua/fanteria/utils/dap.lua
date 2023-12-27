@@ -31,11 +31,26 @@ M.configurations = {
       request = "launch",
       program = function()
         local path
-        vim.ui.input({ prompt = "Path to executable: ", default = vim.loop.cwd() .. "/build/discord-party-bot" }, function(input)
+        vim.ui.input({ prompt = "Path to executable: ", default = vim.loop.cwd() .. "/build/src/advent-of-code" }, function(input)
           path = input
         end)
         vim.cmd [[redraw]]
         return path
+      end,
+      args = function()
+        local arguments
+        vim.ui.input({ prompt = "Arguments: " }, function(input)
+          local function stringToWordArray(str)
+              local wordArray = {}
+              for word in str:gmatch("%S+") do
+                  table.insert(wordArray, word)
+              end
+              return wordArray
+          end
+          arguments = stringToWordArray(input)
+        end)
+        vim.cmd [[redraw]]
+        return arguments
       end,
       cwd = "${workspaceFolder}",
       stopOnEntry = false,
