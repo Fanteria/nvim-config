@@ -5,7 +5,9 @@ M.opts = {
   ignore_install = { "" },
   highlight = {
     enable = true,
-    disable = { "" },
+    disable = function ()
+      return vim.g.is_large_buffer -- this variable is set in auto BufReadPre auto command
+    end,
   },
   incremental_celection = {
     enable = false,

@@ -30,6 +30,20 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
   end
 })
 
+vim.api.nvim_create_autocmd({ "BufReadPre" }, {
+  pattern = '*',
+  callback = function ()
+    if (vim.fn.getfsize(vim.fn.expand("%")) > 2000000) then
+      vim.b.is_large_buffer = true
+      vim.cmd("syntax off")
+      vim.cmd("IBLDisable")
+      vim.cmd("ILLUMINATEPAUSEBUF")
+    else
+      vim.b.is_large_buffer = false
+    end
+  end,
+})
+
 -- Solve problem with tabs jumps to random places because of LuaSnip.
 -- https://github.com/L3MON4D3/LuaSnip/issues/258
 vim.api.nvim_create_autocmd('ModeChanged', {
