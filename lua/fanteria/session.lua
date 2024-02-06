@@ -17,6 +17,7 @@ if not pickers_ok or not finders_ok or not conf_ok or not actions_ok or not acti
   return
 end
 
+-- if folder does not exists will be created
 M.session_filepath = "~/.nvim-sessions"
 M.parent_folder = Path:new(vim.fn.expand(M.session_filepath, ":p"))
 M.actual_session = ""
@@ -30,6 +31,7 @@ M.save = function()
     end
     filename = M.actual_session
   end
+  vim.fn.mkdir(M.parent_folder.filename, "p")
   local absolute_path = M.parent_folder:joinpath(filename .. ".session")
   vim.cmd("mksession! " .. absolute_path.filename)
   M.actual_session = filename
@@ -39,6 +41,7 @@ end
 -- Telescope menu for loading session from `parent_folder` (`parent_folder` must be set)
 M.load = function(opts)
 	opts = opts or {}
+  vim.fn.mkdir(M.parent_folder.filename, "p")
 	local session_paths = scandir.scan_dir(M.parent_folder.filename, { depth = 1, search_pattern = ".session" })
 	local names = {}
 	for _, session_path in ipairs(session_paths) do
