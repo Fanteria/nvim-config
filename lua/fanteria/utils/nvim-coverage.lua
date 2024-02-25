@@ -1,11 +1,15 @@
 local M = {}
 
 M.opts = {
+  summary = {
+    height_percentage = 0.75,
+  },
   lang = {
     rust = {
-      coverage_command = "grcov ${cwd} -s ${cwd} --binary-path ./target/debug/ -t coveralls --branch --ignore-not-existing --token NO_TOKEN --llvm-path /usr/bin"
+      coverage_command = "cargo llvm-cov --lcov --output-path lcov.info"
     },
   },
+  lcov_file = "lcov.info"
 }
 
       -- "notify-send Neovim 'Running coverage' " ..

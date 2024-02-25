@@ -65,7 +65,7 @@ M.get_mappings = function()
       A = { coverage.summary, "All" },
       C = { coverage.clear, "Clear" },
       H = { coverage.hide, "Hide" },
-      L = { function() coverage.load(true) end, "Load" },
+      L = { "<cmd>CoverageLoadLcov lcov.info<cr>", "Load" },
       S = { coverage.show, "Show" },
       T = { coverage.toggle, "Toggle" },
     }
