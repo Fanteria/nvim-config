@@ -30,6 +30,13 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
   end
 })
 
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "/etc/mongodb.conf" },
+  callback = function()
+    vim.cmd("set filetype=yaml")
+  end
+})
+
 vim.api.nvim_create_autocmd({ "BufReadPre" }, {
   pattern = '*',
   callback = function ()
