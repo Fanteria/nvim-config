@@ -146,7 +146,10 @@ require("lazy").setup({
   },
   {
     "rcarriga/nvim-dap-ui",
-    dependencies = "mfussenegger/nvim-dap",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+      "nvim-neotest/nvim-nio",
+    },
     config = require("fanteria.utils.dapui").setup,
   },
 
@@ -172,6 +175,7 @@ require("lazy").setup({
     "kevinhwang91/nvim-ufo",
     dependencies = 'kevinhwang91/promise-async',
   },
+
   -- Colorscheme
   {
     "marko-cerovac/material.nvim",
