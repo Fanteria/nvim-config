@@ -6,12 +6,12 @@ M.get_mappings = function()
 
   local neogen_ok, neogen = pcall(require, "neogen")
   if neogen_ok then
-    map.d = {
+    map.D = {
       name = "Documentation",
-      c = { function() neogen.generate({ type = 'class' }) end, "Class" },
-      f = { function() neogen.generate({ type = 'func' }) end, "Function" },
-      t = { function() neogen.generate({ type = 'type' }) end, "Type" },
-      F = { function() neogen.generate({ type = 'file' }) end, "File" },
+      C = { function() neogen.generate({ type = 'class' }) end, "Class" },
+      F = { function() neogen.generate({ type = 'func' }) end, "Function" },
+      T = { function() neogen.generate({ type = 'type' }) end, "Type" },
+      f = { function() neogen.generate({ type = 'file' }) end, "File" },
     }
   end
 
@@ -36,7 +36,7 @@ M.get_mappings = function()
       B = { telescope.git_branches, "Checkout branch with remote" },
       C = { telescope.git_commits, "Checkout commit" },
       d = { gitsigns.diffthis, "Diff" },
-      D = { function ()
+      D = { function()
         vim.cmd("Gvdiffsplit " .. vim.fn.input("Enter branch to diff: "))
       end, "Diff branch" },
       m = { "<cmd>vertical Git<CR>", "Git status vertical" },
@@ -71,7 +71,24 @@ M.get_mappings = function()
     }
   end
 
-  map.D = { require("fanteria.utils.dapui").toggle_dap_ui, "Toggle debugger" }
+  map.d = {
+    name = "Debugger",
+    r = { function ()
+      local fdap = require("fanteria.utils.dap")
+      if fdap.act_conf == nil then
+        fdap.select_debug_config({ new = true })
+      end
+      require("dap").continue()
+    end, "Run debugger" },
+    b = { require("dap").toggle_breakpoint, "Toggle breakpoint" },
+    s = { require("fanteria.utils.dap").select_debug_config, "Select debugger config" },
+    t = { require("fanteria.utils.dapui").toggle_dap_ui, "Toggle debugger" },
+    R = { function() require("dap.repl").toggle({ height = 15 }) end, "Toggle REPL" },
+    e = { function()
+      local widgets = require("dap.ui.widgets")
+      widgets.sidebar(widgets.expression).open()
+    end, "Toggle expression" },
+  }
 
   map.L = {
     name = "LSP",
@@ -90,6 +107,20 @@ M.get_mappings = function()
 
   map.O = { "<cmd>execute '!xdg-open' shellescape(expand('<cfile>', 1))<CR>", "Open path" }
 
+  map.t = {
+    name = "Toggle",
+    w = { function ()
+      vim.opt.wrap = not vim.opt.wrap:get()
+    end, "wrap" },
+    s = { function ()
+      vim.opt.spell = not vim.opt.spell:get()
+    end, "spell" },
+    W = { 
+      require("fanteria.visual.indent-blankline").toggle_whitespaces,
+      "whitespaces"
+    }
+  }
+
   local session_ok, session = pcall(require, "fanteria.session")
   if session_ok then
     map.S = {
@@ -107,8 +138,6 @@ M.get_mappings = function()
       end, "Actual session" },
     }
   end
-
-  map.W = { require("fanteria.visual.indent-blankline").toggle_whitespaces, "Toggle whitespaces" }
 
   map.X = {
     name = "Options",
@@ -129,11 +158,16 @@ M.opts = {
   ignore_missing = true,
 }
 
+M.map_opts = {
+  prefix = "<leader>",
+  nowait = true
+}
+
 M.setup = function(_, opts)
   local which_key = require("which-key")
 
   which_key.setup(opts)
-  which_key.register(M.get_mappings(), { prefix = "<leader>", nowait = true })
+  which_key.register(M.get_mappings(), M.map_opts)
 end
 
 return M
