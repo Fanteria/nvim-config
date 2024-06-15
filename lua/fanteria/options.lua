@@ -61,6 +61,9 @@ o.numberwidth = 2
 o.relativenumber = true
 o.signcolumn = "yes" -- alway draw sign column
 
+-- Disable change to tabstop and shiftwidth back to 4
+vim.g.markdown_recommended_style = 0
+
 -- Lines
 o.cursorline = true -- highlight cursor line
 o.wrap = true
