@@ -84,4 +84,13 @@ M.notify = function(msg, lvl)
   Job:new({command = "notify-send", args = { "-i", "/home/jirka/Neovim-mark.svg.png", "-u", level, "Neovim", msg} }):start()
 end
 
+-- Function to customize folded text
+function FoldText()
+  local start_line = vim.fn.getline(vim.v.foldstart)
+  local line_count = vim.v.foldend - vim.v.foldstart + 1
+  local end_line = vim.fn.getline(vim.v.foldend)
+  return start_line .. " ... " .. line_count .. " lines ... " .. end_line
+end
+
 return M
+

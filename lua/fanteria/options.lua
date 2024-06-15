@@ -23,20 +23,11 @@ o.shortmess:append("c")
 o.iskeyword:append("-")
 
 -- Folding
-o.foldlevel = 20
--- o.foldmethod = "expr"
--- o.foldexpr = "nvim_treesitter#foldexpr()"
--- o.foldtext = "substitute(getline(v:foldstart),'\\t',repeat(' ',&tabstop),'g').' ... '.trim(getline(v:foldend))" -- formatted folding
-o.fillchars = "fold: "
-o.foldnestmax = 3
-o.foldminlines = 1
-o.foldcolumn = '0'
 o.foldlevel = 99
-o.foldlevelstart = 99
-o.foldenable = true
+o.fillchars = { fold = " " }
 
 -- Tabs and spaces
-o.smartindent = true
+o.smartindent = false
 o.breakindent = true -- wrapped line will continue visually indented
 o.expandtab = true
 o.showtabline = 0 -- 2 to show tabline
