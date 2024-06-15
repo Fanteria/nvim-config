@@ -12,6 +12,7 @@ local default_setup = function(server)
   })
 end
 
+-- For bashls must be installed shellcheck on system.
 M.opts = {
   ensure_installed = { "lua_ls", "clangd", "bashls", "rust_analyzer" },
   handlers = {
