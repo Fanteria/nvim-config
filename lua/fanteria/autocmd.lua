@@ -23,13 +23,6 @@ vim.api.nvim_create_autocmd({ "BufWinLeave" }, {
   end
 })
 
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-  pattern = "*.*",
-  callback = function(_)
-    vim.cmd("silent! loadview")
-  end
-})
-
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = { "/etc/mongodb.conf" },
   callback = function()
@@ -64,3 +57,15 @@ vim.api.nvim_create_autocmd('ModeChanged', {
     end
   end
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function ()
+    if require("nvim-treesitter.parsers").has_parser() then
+      vim.opt.foldmethod = "expr"
+      vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+    else
+      vim.opt.foldmethod = "syntax"
+    end
+  end
+})
+
