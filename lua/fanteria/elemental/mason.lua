@@ -18,20 +18,24 @@ M.opts = {
   handlers = {
     default_setup,
     lua_ls = function()
-      require("lspconfig").lua_ls.setup({
-        capabilities = capabilities,
-        settings = {
-          Lua = {
-            runtime = {
-              version = 'LuaJIT'
-            },
-            diagnostics = {
-              globals = { "vim" },
-            },
-          },
-        },
-      })
+      require("lspconfig").lua_ls.setup(M.server_opts.lua_ls)
     end,
+  },
+}
+
+M.server_opts = {
+  lua_ls = {
+    capabilities = capabilities,
+    settings = {
+      Lua = {
+        runtime = {
+          version = 'LuaJIT'
+        },
+        diagnostics = {
+          globals = { "vim" },
+        },
+      },
+    },
   },
 }
 
