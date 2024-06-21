@@ -20,6 +20,7 @@ require("lazy").setup({
   {
     "nvim-treesitter/nvim-treesitter",
     opts = require("fanteria.elemental.treesitter").opts,
+    setup = require("fanteria.elemental.treesitter").setup,
     build = ":TSUpdate",
     main = "nvim-treesitter.configs",
   },

@@ -9,7 +9,7 @@ M.opts = {
       return vim.g.is_large_buffer -- this variable is set in auto BufReadPre auto command
     end,
   },
-  incremental_celection = {
+  incremental_selection = {
     enable = false,
     disable = { "" },
     keymaps = {
@@ -41,5 +41,13 @@ M.opts = {
     },
   }
 }
+
+M.setup = function(_, opts)
+  local setup_opts = require'nvim-treesitter.configs'.setup
+  for k,v in pairs(opts) do 
+    setup_opts[k] = v 
+  end
+  require("nvim-treesitter.install").compilers = { 'clang' }
+end
 
 return M

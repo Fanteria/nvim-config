@@ -175,6 +175,5 @@ map("x", "J", ":move '>+1<CR>gv-gv", opts)
 map("x", "K", ":move '<-2<CR>gv-gv", opts)
 
 -- Sort selected lines
-map("x", "<C-s>", ":sort<CR>", opts)
 map("x", "<C-s>s", ":sort<CR>", opts)
 map("x", "<C-s>u", ":sort u<CR>", opts)
