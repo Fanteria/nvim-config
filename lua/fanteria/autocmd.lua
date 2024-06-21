@@ -63,10 +63,9 @@ vim.api.nvim_create_autocmd("FileType", {
     if require("nvim-treesitter.parsers").has_parser() then
       vim.wo.foldmethod = "expr"
       vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-      vim.wo.foldtext = "v:lua.FoldText()"
+      vim.wo.foldtext = [[luaeval('HighlightedFoldtext')()]]
     else
       vim.wo.foldmethod = "syntax"
-      vim.wo.foldtext = "v:lua.FoldText()"
     end
   end
 })
