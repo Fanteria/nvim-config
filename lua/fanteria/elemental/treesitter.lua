@@ -39,13 +39,14 @@ M.opts = {
       goto_node = '<cr>',
       show_help = '?',
     },
-  }
+  },
+  textobjects = require("fanteria.elemental.treesitter-textobjects").opts,
 }
 
 M.setup = function(_, opts)
   local setup_opts = require'nvim-treesitter.configs'.setup
-  for k,v in pairs(opts) do 
-    setup_opts[k] = v 
+  for k,v in pairs(opts) do
+    setup_opts[k] = v
   end
   require("nvim-treesitter.install").compilers = { 'clang' }
 end

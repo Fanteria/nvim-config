@@ -26,10 +26,12 @@ require("lazy").setup({
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-    },
+    dependencies = "nvim-treesitter/nvim-treesitter",
     opts = require("fanteria.elemental.treesitter-context").opts,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    dependencies = "nvim-treesitter/nvim-treesitter",
   },
 
   -- LSP
