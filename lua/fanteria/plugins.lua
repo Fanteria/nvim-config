@@ -134,12 +134,16 @@ require("lazy").setup({
     dependencies = "nvim-treesitter/nvim-treesitter",
   },
   "moll/vim-bbye",
+  {
+    "folke/trouble.nvim",
+    opts = require("fanteria.utils.trouble").opts,
+    cmd = "Trouble",
+  },
 
   -- Git
   {
     "lewis6991/gitsigns.nvim",
     opts = require("fanteria.visual.gitsigns").opts,
-    -- config = require("fanteria.visual.gitsigns").setup,
   },
   "tpope/vim-fugitive",
 
