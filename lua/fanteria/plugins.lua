@@ -75,7 +75,7 @@ require("lazy").setup({
   {
     "L3MON4D3/LuaSnip",
     build = "make install_jsregexp",
-    opts = require("fanteria.elemental.luasnip")
+    opts = require("fanteria.elemental.luasnip").opts,
   },
 
   -- Utils --
