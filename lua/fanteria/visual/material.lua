@@ -52,6 +52,9 @@ M.custom_highlights = function(c)
   h["@property"]              = { fg = c.main.paleblue }
   h["@namespace"]             = { fg = c.main.paleblue }
   h["@keyword"]               = { fg = c.main.purple }
+  h["Exception"]              = { fg = c.main.red }
+
+  h['@lsp.mod.virtual.cpp']   = { italic = true }
 
   -- luasnip
   h.DiagnosticHint = { fg = c.main.cyan }

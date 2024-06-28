@@ -206,11 +206,13 @@ require("lazy").setup({
   -- "akinsho/bufferline.nvim",
   --
   -- "akinsho/toggleterm.nvim",
-  -- markdown preview
-  -- {
-  --   "iamcco/markdown-preview.nvim",
-  --   run = function,
-  --     vim.fn["mkdp#util#install"],
-  --   end,
-  -- },
+
+  -- Markdown preview
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function() vim.fn["mkdp#util#install"]() end,
+    config = require("fanteria.utils.markdown-preview").setup,
+  },
 }, {})
