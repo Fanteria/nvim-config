@@ -120,6 +120,37 @@ M.get_mappings = function()
       "whitespaces"
     }
   }
+  
+  local trouble_ok, trouble = pcall(require, "trouble")
+  if trouble_ok then
+    map.T = {
+      name = "Trouble",
+      D = {
+        function ()
+          trouble.toggle({mode = "diagnostics", focus = true})
+        end,
+        "Diagnostics"
+      },
+      I = {
+        function ()
+          trouble.toggle({mode = "lsp_incoming_calls", focus = true})
+        end,
+        "Incoming"
+      },
+      O = {
+        function ()
+          trouble.toggle({mode = "lsp_outgoing_calls", focus = true})
+        end,
+        "Outcoming"
+      },
+      R = {
+        function ()
+          trouble.toggle({mode = "lsp_references", focus = true})
+        end,
+        "References"
+      },
+    }
+  end
 
   local session_ok, session = pcall(require, "fanteria.session")
   if session_ok then
