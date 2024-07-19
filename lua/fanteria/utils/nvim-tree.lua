@@ -99,4 +99,13 @@ M.opts = {
   end,
 }
 
+local fn = require("utils").fn
+M.keys = {
+  {
+    "<leader>e",
+    fn("nvim-tree.api", function(n) n.tree.toggle() end),
+    hidden = true,
+  },
+}
+
 return M

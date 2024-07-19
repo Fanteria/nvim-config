@@ -73,4 +73,76 @@ M.setup = function(_, opts)
   telescope.load_extension('projects')
 end
 
+local fn = require("utils").fn
+M.keys = {
+  {
+    "<leader>u",
+    fn("telescope", function(t)
+      t.extensions.undo.undo()
+      local keys = vim.api.nvim_replace_termcodes('<ESC>', true, false, true)
+      vim.api.nvim_feedkeys(keys, 'm', false)
+    end),
+    desc = "Undotree",
+  },
+  {
+    "<leader>F",
+    fn("telescope.builtin", function(t) t.live_grep() end),
+    hidden = true,
+  },
+  {
+    "<C-p>",
+    fn("telescope.builtin", function(t) t.find_files() end),
+    hidden = true,
+  },
+  {
+    "<C-b>",
+    fn({"telescope.builtin", "telescope.themes"}, function(r)
+      r["telescope.builtin"].buffers(r["telescope.themes"].get_dropdown({ previewer = false }))
+    end),
+    hidden = true,
+  },
+
+  { "<leader>X", group = "Options" },
+  {
+    "<leader>Xc",
+    fn("telescope", function(t) t.colorscheme() end),
+    desc = "Colorscheme",
+  },
+  {
+    "<leader>Xh",
+    fn("telescope", function(t) t.help_tags() end),
+    desc = "Find Help",
+  },
+  {
+    "<leader>Xm",
+    fn("telescope", function(t) t.man_pages() end),
+    desc = "Man Pages",
+  },
+  {
+    "<leader>Xr",
+    fn("telescope", function(t) t.oldfiles() end),
+    desc = "Open Recent File",
+  },
+  {
+    "<leader>XR",
+    fn("telescope", function(t) t.registers() end),
+    desc = "Registers",
+  },
+  {
+    "<leader>Xk",
+    fn("telescope", function(t) t.keymaps() end),
+    desc = "Keymaps",
+  },
+  {
+    "<leader>XC",
+    fn("telescope", function(t) t.commands() end),
+    desc = "Commands",
+  },
+  {
+    "<leader>XL",
+    "<cmd>Lazy<CR>",
+    desc = "Lazy"
+  },
+}
+
 return M
