@@ -5,7 +5,7 @@ M.prev_mappings = nil
 M.toggle_dap_ui = function()
   local dap_mappings = require("fanteria.utils.dap").get_mappings()
   local dapui = require("dapui")
-  dap_mappings["W"] = function ()
+  dap_mappings["W"] = function()
     dapui.elements.watches.add(vim.fn.input("Watches: "))
   end
   if not M.prev_mappings then
@@ -41,7 +41,7 @@ M.toggle_dap_ui = function()
   end
 end
 
-M.setup = function (_, _)
+M.setup = function(_, _)
   local dapui = require("dapui")
   dapui.setup()
 
@@ -49,11 +49,22 @@ M.setup = function (_, _)
   vim.api.nvim_set_hl(0, "DapStoppedHL", { fg = colors.main.green })
   vim.api.nvim_set_hl(0, "DapBreakpointHL", { fg = colors.main.red })
 
-  vim.fn.sign_define('DapBreakpoint', {text='', texthl='DapBreakpointHL', linehl='', numhl=''})
-  vim.fn.sign_define('DapBreakpointCondition', {text='C', texthl='', linehl='', numhl=''})
-  vim.fn.sign_define('DapLogPoint', {text='L', texthl='', linehl='', numhl=''})
-  vim.fn.sign_define('DapStopped', {text='', texthl='DapStoppedHL', linehl='DapStoppedHL', numhl=''})
-  vim.fn.sign_define('DapBreakpointRejected', {text='󰅙', texthl='', linehl='', numhl=''})
+  vim.fn.sign_define('DapBreakpoint', { text = '', texthl = 'DapBreakpointHL', linehl = '', numhl = '' })
+  vim.fn.sign_define('DapBreakpointCondition', { text = 'C', texthl = '', linehl = '', numhl = '' })
+  vim.fn.sign_define('DapLogPoint', { text = 'L', texthl = '', linehl = '', numhl = '' })
+  vim.fn.sign_define('DapStopped', { text = '', texthl = 'DapStoppedHL', linehl = 'DapStoppedHL', numhl = '' })
+  vim.fn.sign_define('DapBreakpointRejected', { text = '󰅙', texthl = '', linehl = '', numhl = '' })
 end
+
+M.required = { "dap", "dap.repl", "fanteria.utils.dap", "fanteria.utils.dapui" }
+
+M.keys = {
+  { "<leader>d", group = "Debugger" },
+  {
+    "<leader>dt",
+    M.toggle_dap_ui,
+    desc = "Toggle debugger",
+  },
+}
 
 return M

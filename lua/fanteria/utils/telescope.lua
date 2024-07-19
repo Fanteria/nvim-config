@@ -43,7 +43,7 @@ M.setup = function(_, opts)
   opts.extensions = {
     undo = {
       use_delta = true,
-      diff_context_lines = 9,
+      vim_diff_opts = { ctxlen = 9 },
       side_by_side = true,
       layout_strategy = "vertical",
       layout_config = {

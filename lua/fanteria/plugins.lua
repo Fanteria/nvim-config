@@ -81,8 +81,8 @@ require("lazy").setup({
   -- Utils --
   {
     "folke/which-key.nvim",
+    event = "VeryLazy",
     opts = require("fanteria.utils.which-key").opts,
-    config = require("fanteria.utils.which-key").setup,
   },
   {
     "nvim-telescope/telescope.nvim",

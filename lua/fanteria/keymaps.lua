@@ -1,5 +1,134 @@
+local M = {}
+
+local fn = require("utils").fn
+
 local opts = { noremap = true, silent = true }
 local map = vim.keymap.set
+
+M.keys = {
+  -- TODO can conflict with tabs maps.
+  { "<leader>t", group = "Toggle" },
+  {
+    "<leader>tw",
+    function() vim.opt.wrap = not vim.opt.wrap:get() end,
+    desc = "Wrap",
+  },
+  {
+    "<leader>ts",
+    function() vim.opt.spell = not vim.opt.spell:get() end,
+    desc = "Spell"
+  },
+  {
+    "<leader>tW",
+    fn("fanteria.visual.indent-blankline", function(i) i.toggle_whitespaces() end),
+    desc = "Whitespaces",
+  },
+
+  {
+    "<leader>y",
+    '<cmd>let @+ = expand("%:p")<CR>',
+    desc = "Yank buffer path",
+  },
+
+  { "<leader>X", group = "Options" },
+  {
+    "<leader>Xc",
+    fn("telescope", function(t) t.colorscheme() end),
+    desc = "Colorscheme",
+  },
+  {
+    "<leader>Xh",
+    fn("telescope", function(t) t.help_tags() end),
+    desc = "Find Help",
+  },
+  {
+    "<leader>Xm",
+    fn("telescope", function(t) t.man_pages() end),
+    desc = "Man Pages",
+  },
+  {
+    "<leader>Xr",
+    fn("telescope", function(t) t.oldfiles() end),
+    desc = "Open Recent File",
+  },
+  {
+    "<leader>XR",
+    fn("telescope", function(t) t.registers() end),
+    desc = "Registers",
+  },
+  {
+    "<leader>Xk",
+    fn("telescope", function(t) t.keymaps() end),
+    desc = "Keymaps",
+  },
+  {
+    "<leader>XC",
+    fn("telescope", function(t) t.commands() end),
+    desc = "Commands",
+  },
+  {
+    "<leader>XL",
+    "<cmd>Lazy<CR>",
+    desc = "Lazy"
+  },
+
+  {
+    "<leader>O",
+    "<cmd>execute '!xdg-open' shellescape(expand('<cfile>', 1))<CR>",
+    desc = "Open path"
+  },
+
+  {
+    "<leader>u",
+    fn("telescope", function(t)
+      t.extensions.undo.undo()
+      local keys = vim.api.nvim_replace_termcodes('<ESC>', true, false, true)
+      vim.api.nvim_feedkeys(keys, 'm', false)
+    end),
+    desc = "Undotree",
+  },
+
+  -- Hidden
+  {
+    hidden = true,
+    mode = { "n" },
+
+    -----------------
+    -- Normal mode --
+    -----------------
+
+    -- Basics --
+    { "<leader>w", "<cmd>w!<CR>" },
+    { "<leader>q", "<cmd>q!<CR>" },
+    { "<leader>Q", "<cmd>wqa<CR>" },
+
+    -- hide highlight
+    { "<leader>H", "<cmd>nohlsearch<CR>" },
+
+    -- Windows --
+    -- Navigation in windows
+    { "<leader>h", "<C-w>h" },
+    { "<leader>j", "<C-w>j" },
+    { "<leader>k", "<C-w>k" },
+    { "<leader>l", "<C-w>l" },
+
+    -- Tabs --
+    {
+      "<C-t>",
+      fn({"telescope.themes", "fanteria.functions"}, function(t)
+        t["fanteria.functions"].telescope_buffers_in_tabs(t["telescope_theme"].get_dropdown({ previewer = false }))
+      end)
+    },
+
+    -- Extensions --
+    -- File explorer
+    {
+      "<leader>e",
+      fn("nvim-tree.api", function(n) n.tree.toggle() end),
+    },
+
+  },
+}
 
 -- Map <leader> key
 vim.api.nvim_set_keymap("", "<Space>", "<Nop>", opts)
@@ -19,11 +148,11 @@ map("n", "`", "m", opts)
 map("n", "m", "`", opts)
 
 -- Basics --
-map("n", "<leader>w", "<cmd>w!<CR>", opts)
-map("n", "<leader>q", "<cmd>q!<CR>", opts)
-map("n", "<leader>Q", "<cmd>wqa<CR>", opts)
+-- map("n", "<leader>w", "<cmd>w!<CR>", opts)
+-- map("n", "<leader>q", "<cmd>q!<CR>", opts)
+-- map("n", "<leader>Q", "<cmd>wqa<CR>", opts)
 -- hide highlight
-map("n", "<leader>H", "<cmd>nohlsearch<CR>", opts)
+-- map("n", "<leader>H", "<cmd>nohlsearch<CR>", opts)
 
 -- fix last misspell
 map("n", "<C-f>", "mx[s1z=`x", opts)
@@ -47,10 +176,10 @@ end)
 
 -- Windows --
 -- Navigation in windows
-map("n", "<leader>h", "<C-w>h", opts)
-map("n", "<leader>j", "<C-w>j", opts)
-map("n", "<leader>k", "<C-w>k", opts)
-map("n", "<leader>l", "<C-w>l", opts)
+-- map("n", "<leader>h", "<C-w>h", opts)
+-- map("n", "<leader>j", "<C-w>j", opts)
+-- map("n", "<leader>k", "<C-w>k", opts)
+-- map("n", "<leader>l", "<C-w>l", opts)
 
 -- Change size of window
 map("n", "<C-Up>", ":resize -2<CR>", opts)
@@ -59,12 +188,13 @@ map("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 map("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -- Tabs --
-local telescope_theme_ok, telescope_theme = pcall(require, "telescope.themes")
-if telescope_theme_ok then
-  map("n", "<C-t>", function()
-    require("fanteria.functions").telescope_buffers_in_tabs(telescope_theme.get_dropdown({ previewer = false }))
-  end, opts)
-end
+-- local telescope_theme_ok, telescope_theme = pcall(require, "telescope.themes")
+-- if telescope_theme_ok then
+--   map("n", "<C-t>", function()
+--     require("fanteria.functions").telescope_buffers_in_tabs(telescope_theme.get_dropdown({ previewer = false }))
+--   end, opts)
+-- end
+
 -- telescope.buffers(telescope_theme.get_dropdown({ previewer = false }))
 map("n", "<leader>tn", ":tabnew %<CR>", opts)
 map("n", "<leader>tc", vim.cmd.tabclose, opts)
@@ -92,13 +222,6 @@ for i = 1, 9 do
 end
 map("n", "<leader>t0", ":tablast<CR>", opts)
 
--- Extensions --
--- File explorer
-local nvimtree_ok, nvimtree = pcall(require, "nvim-tree.api")
-if nvimtree_ok then
-  map("n", "<leader>e", nvimtree.tree.toggle, opts)
-end
-
 -- Bufferline
 -- local bufferline_ok, _ = pcall(require, "bufferline")
 -- if bufferline_ok then
@@ -110,15 +233,11 @@ map("n", "<C-h>", "<cmd>bp<CR>", opts)
 map("n", "<leader>c", "<cmd>Bdelete<CR>", opts)
 
 -- Telescope
-local telescope_ok, telescope = pcall(require, "telescope.builtin")
--- local telescope_theme_ok, telescope_theme = pcall(require, "telescope.themes")
-if telescope_ok and telescope_theme_ok then
-  map("n", "<leader>F", telescope.live_grep, opts)
-  map("n", "<C-p>", telescope.find_files, opts)
-  map("n", "<C-b>", function()
-    telescope.buffers(telescope_theme.get_dropdown({ previewer = false }))
-  end, opts)
-end
+map("n", "<leader>F", fn("telescope.builtin", function(t) t.live_grep() end))
+map("n", "<C-p>", fn("telescope.builtin", function(t) t.find_files() end))
+map("n", "<C-b>", fn({"telescope.builtin", "telescope.themes"}, function(r)
+  r["telescope.builtin"].buffers(r["telescope.theme"].get_dropdown({ previewer = false }))
+end))
 
 -- Switch source and header
 map("n", "gh", "<cmd>ClangdSwitchSourceHeader<cr>", opts)
@@ -177,3 +296,5 @@ map("x", "K", ":move '<-2<CR>gv-gv", opts)
 -- Sort selected lines
 map("x", "<C-s>s", ":sort<CR>", opts)
 map("x", "<C-s>u", ":sort u<CR>", opts)
+
+return M

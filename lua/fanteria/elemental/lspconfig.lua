@@ -50,4 +50,49 @@ M.setup = function()
   })
 end
 
+local fn = require("utils").fn
+M.keys = {
+  { "<leader>L", group = "LSP" },
+  {
+    "<leader>Ld",
+    fn("telescope", function(t) t.diagnostics() end),
+    desc = "Diagnostics",
+  },
+  {
+    "<leader>Li",
+    "<cmd>LspInfo<cr>",
+    desc = "Info"
+  },
+  {
+    "<leader>LI",
+    "<cmd>Mason<cr>",
+    desc = "Installer Info"
+  },
+  {
+    "<leader>Ll",
+    vim.lsp.codelens.run,
+    desc = "CodeLens Action"
+  },
+  {
+    "<leader>Lq",
+    vim.lsp.diagnostic.set_loclist,
+    desc = "Quickfix"
+  },
+  {
+    "<leader>Lp",
+    "<cmd>TSPlaygroundToggle<CR>",
+    desc = "Treesitter playground"
+  },
+  {
+    "<leader>Ls",
+    fn("telescope", function(t) t.lsp_document_symbols() end),
+    desc = "Document Symbols"
+  },
+  {
+    "<leader>LS",
+    fn("telescope", function(t) t.lsp_dynamic_workspace_symbols() end),
+    desc = "Workspace Symbols",
+  },
+}
+
 return M

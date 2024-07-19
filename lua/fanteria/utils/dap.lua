@@ -155,4 +155,45 @@ M.setup = function(_, _)
   end
 end
 
+local fn = require("utils").fn
+M.keys = {
+  {
+    "<leader>B",
+    fn("dap", function(d) d.toggle_breakpoint() end),
+    desc = "Toggle breakpoint"
+  },
+
+  { "<leader>d", group = "Debugger" },
+  {
+    "<leader>dr",
+    fn("dap", function(dap) -- TODO
+      if M.act_conf == nil then
+        M.select_debug_config({ new = true })
+      end
+      dap.continue()
+    end),
+    desc = "Run debugger",
+  },
+  {
+    "<leader>db",
+    fn("dap", function(r) r.dap.toggle_breakpoint() end),
+    desc = "Toggle breakpoint",
+  },
+  {
+    "<leader>ds", -- TODO
+    M.select_debug_config,
+    desc = "Select debugger config",
+  },
+  {
+    "<leader>dR",
+    fn("dap.repl", function(d) d.toggle({ height = 15 }) end),
+    desc = "Toggle REPL",
+  },
+  {
+    "<leader>de",
+    fn("dap.ui.widgets", function(w) w.sidebar(w.expression).open() end),
+    desc = "Toggle expression",
+  },
+}
+
 return M
