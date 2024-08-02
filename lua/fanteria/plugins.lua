@@ -215,4 +215,10 @@ require("lazy").setup({
     build = function() vim.fn["mkdp#util#install"]() end,
     config = require("fanteria.utils.markdown-preview").setup,
   },
+
+  -- C++ implementation generator
+  {
+    'eriks47/generate.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' }
+  }
 }, {})
