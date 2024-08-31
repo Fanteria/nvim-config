@@ -1,5 +1,33 @@
 local M = {}
 
+--- Open selection and run function if some of options are selected.
+---@param title string Selection window title.
+---@param options string[] List of options.
+---@param to_run fun(string):nil parameter
+---@param opts ?table Telescope options.
+M.open_selection = function (title, options, to_run, opts)
+  opts = opts or {}
+  local finders = require("telescope.finders")
+  local conf = require("telescope.config")
+  local actions = require("telescope.actions")
+  local pickers = require("telescope.pickers")
+  pickers
+      .new(opts, {
+        prompt_title = title,
+        finder = finders.new_table({ results = options }),
+        sorter = conf.values.generic_sorter(opts),
+        attach_mappings = function(prompt_bufnr, _)
+          actions.select_default:replace(function()
+            local selected_option = require("telescope.actions.state").get_selected_entry()[1]
+            actions.close(prompt_bufnr)
+            to_run(selected_option)
+          end)
+          return true
+        end,
+      })
+      :find()
+end
+
 M.opts = {
   defaults = {
     prompt_prefix = "󰍉 ",
@@ -62,6 +90,9 @@ M.setup = function(_, opts)
         },
       },
     },
+    ["ui-select"] = {
+
+    },
   }
 
   telescope.setup(opts)
@@ -70,7 +101,8 @@ M.setup = function(_, opts)
   require("project_nvim").setup({
     detection_methods = { "pattern" },
   })
-  telescope.load_extension('projects')
+  telescope.load_extension("ui-select")
+  telescope.load_extension("projects")
 end
 
 local fn = require("utils").fn

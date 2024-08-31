@@ -89,7 +89,6 @@ M.setup = function (_, opts)
   vim.g.material_style = "darker"
   local colors = require("material.colors")
   opts.custom_highlights = M.custom_highlights(colors)
-  -- print(vim.inspect(opts))
   material.setup(opts)
 
   vim.cmd("colorscheme material")

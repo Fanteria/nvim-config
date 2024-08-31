@@ -88,7 +88,10 @@ require("lazy").setup({
     "nvim-telescope/telescope.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "debugloop/telescope-undo.nvim", -- extension like undotree
+      -- extension like undotree
+      "debugloop/telescope-undo.nvim",
+      -- vim select options are delegated to telescope
+      "nvim-telescope/telescope-ui-select.nvim",
     },
     opts = require("fanteria.utils.telescope").opts,
     config = require("fanteria.utils.telescope").setup,
@@ -197,6 +200,13 @@ require("lazy").setup({
     config = require("fanteria.title.alpha").setup,
   },
   "ahmedkhalf/project.nvim",
+
+  -- LLM --
+  {
+    "David-Kunz/gen.nvim",
+    opts = require("fanteria.utils.gen").opts,
+    config = require("fanteria.utils.gen").setup
+  },
 
   -- this plugin automatically follow symlinks if are opened
   -- I use it to auto follow from `include` directories

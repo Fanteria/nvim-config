@@ -27,6 +27,7 @@ local function get_keys()
   add_keys(require("fanteria.utils.trouble").keys)
   add_keys(require("fanteria.visual.gitsigns").keys)
   add_keys(require("fanteria.utils.telescope").keys)
+  add_keys(require("fanteria.utils.gen").keys)
 
   return merged
 end

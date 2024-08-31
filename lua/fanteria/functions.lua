@@ -24,8 +24,6 @@ M.telescope_buffers_in_tabs = function (opts)
   local buffers_data = {}
 
   local all = M.get_bufs()
-  -- vim.notify(vim.inspect(buffers_data))
-  -- vim.notify(vim.inspect(all))
   for bufrn, winrn in pairs(M.get_open_bufs()) do
       buffers_data[all[bufrn]] = {
         win = winrn,
