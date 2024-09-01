@@ -2,6 +2,8 @@ local M = {}
 
 M.actual_session = ""
 
+--- Path where sessions will be stored. Path is `$HOME/.nvim-sessions/`.
+---@return table | nil Path to sessions.
 local function get_parent_folder()
   local Path_ok, Path = pcall(require, "plenary.path")
   if not Path_ok then
@@ -14,7 +16,10 @@ local function get_parent_folder()
   return Path:new(vim.fn.expand(session_filepath, ":p"))
 end
 
-M.save = function()
+--- Save actual state as new session or update actual session
+--- if given name is empty.
+---@return boolean True is session has been saved.
+function M.save()
   local filename = vim.fn.input("Enter session name: ")
   if filename == "" then
     if M.actual_session == "" then
@@ -34,21 +39,12 @@ M.save = function()
   return true
 end
 
--- Telescope menu for loading session from `parent_folder` (`parent_folder` must be set)
-M.load = function(opts)
+--- Open telescope window with sessions. Selected session will be loaded.
+---@param opts ?table Telescope options.
+function M.load(opts)
   local scandir_ok, scandir = pcall(require, "plenary.scandir")
   if not scandir_ok then
-    vim.notify("Plenary cannot be loaded.")
-    return
-  end
-
-  local pickers_ok, pickers = pcall(require, "telescope.pickers")
-  local finders_ok, finders = pcall(require, "telescope.finders")
-  local conf_ok, conf = pcall(require, "telescope.config")
-  local actions_ok, actions = pcall(require, "telescope.actions")
-  local action_state_ok, action_state = pcall(require, "telescope.actions.state")
-  if not pickers_ok or not finders_ok or not conf_ok or not actions_ok or not action_state_ok then
-    vim.notify("Telescope cannot be loaded.")
+    vim.notify("Plenary cannot be loaded.", vim.log.levels.ERROR)
     return
   end
 
@@ -66,26 +62,15 @@ M.load = function(opts)
     table.insert(names, name)
   end
 
-  pickers
-      .new(opts, {
-        prompt_title = "Sessions",
-        finder = finders.new_table({ results = names }),
-        sorter = conf.values.generic_sorter(opts),
-        attach_mappings = function(prompt_bufnr, _)
-          actions.select_default:replace(function()
-            actions.close(prompt_bufnr)
-            local selection = action_state.get_selected_entry()[1]
-            M.actual_session = selection
-            local path = parent_folder:joinpath(selection .. ".session")
-            vim.cmd("silent! source " .. path.filename)
-          end)
-          return true
-        end,
-      })
-      :find()
+  require("fanteria.utils.telescope").open_selection("Sessions", names, function(selected)
+    M.actual_session = selected
+    local path = parent_folder:joinpath(selected .. ".session")
+    vim.cmd("silent! source " .. path.filename)
+  end)
 end
 
 local fn = require("utils").fn
+--- Keymaps
 M.keys = {
   { "<leader>S", group = "Sessions" },
 

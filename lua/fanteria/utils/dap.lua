@@ -58,8 +58,13 @@ function M.start(opts)
     end)
 end
 
-M.setup = function(_, _)
+--- Setup function.
+function M.setup()
+  -- Debug adapters wiki.
+  -- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#ccrust-via-gdb
   local dap = require("dap")
+  -- Codelldb manual.
+  -- https://github.com/vadimcn/codelldb/blob/master/MANUAL.md
   dap.adapters.codelldb = {
     type = "server",
     port = "${port}",
@@ -71,8 +76,9 @@ M.setup = function(_, _)
 end
 
 local fn = require("utils").fn
+--- Keymaps.
 M.keys = {
-  { "<leader>d", group = "Debugger" },
+  { "<leader>d",  group = "Debugger" },
   {
     "<leader>db",
     fn("dap", function(d) d.toggle_breakpoint() end),

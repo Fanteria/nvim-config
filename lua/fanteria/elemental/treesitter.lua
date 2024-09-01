@@ -1,11 +1,12 @@
 local M = {}
 
+--- Treesitter options.
 M.opts = {
   ensure_installed = "all",
   ignore_install = { "" },
   highlight = {
     enable = true,
-    disable = function ()
+    disable = function()
       return vim.g.is_large_buffer -- this variable is set in auto BufReadPre auto command
     end,
   },
@@ -43,10 +44,15 @@ M.opts = {
   textobjects = require("fanteria.elemental.treesitter-textobjects").opts,
 }
 
-M.setup = function(_, opts)
-  local setup_opts = require'nvim-treesitter.configs'.setup
-  for k,v in pairs(opts) do
-    setup_opts[k] = v
+--- Setup function.
+---@param _ table Plugin data.
+---@param opts ?table Options.
+function M.setup(_, opts)
+  if opts ~= nil then
+    local setup_opts = require 'nvim-treesitter.configs'.setup
+    for k, v in pairs(opts) do
+      setup_opts[k] = v
+    end
   end
   require("nvim-treesitter.install").compilers = { 'clang' }
 end

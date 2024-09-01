@@ -1,7 +1,6 @@
 local M = {}
 
-local fn = require("utils").fn
-
+--- Neogen options.
 M.opts = {
   enabled = true,
   snippet_engine = "luasnip",
@@ -20,6 +19,8 @@ M.opts = {
   },
 }
 
+local fn = require("utils").fn
+--- Keymaps.
 M.keys = {
   { "<leader>D", group = "Documentation" },
   {

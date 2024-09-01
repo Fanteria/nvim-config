@@ -1,9 +1,31 @@
 local M = {}
 
+--- Find names of all modules in some directory.
+---@param base_dir string Base directory.
+---@return string[] List of found modules.
+local function find_modules(base_dir)
+  local modules = {}
+  local scandir = require("plenary.scandir")
+  scandir.scan_dir(base_dir, {
+    hidden = true,
+    depth = 10,  -- Adjust depth as needed
+    on_insert = function(file)
+      if file:match("%.lua$") then
+        -- Convert file path to module name
+        local module_path = file:gsub(base_dir .. "/", ""):gsub("%.lua$", ""):gsub("/", ".")
+        table.insert(modules, module_path)
+      end
+    end,
+  })
+  return modules
+end
+
+--- Load keymaps.
+---@return table Keymaps.
 local function get_keys()
   local merged = {}
 
-  local add_keys = function(mappings)
+  local function add_keys(mappings)
     for _, mapping in ipairs(mappings) do
       local leader = "<leader>"
       if string.sub(mapping[1],1,#leader) == leader then
@@ -15,29 +37,32 @@ local function get_keys()
     end
   end
 
-  add_keys(require("fanteria.keymaps").keys)
+  -- List all modules and look for `keys` table with keymaps.
+  local base_dir = vim.fn.stdpath("config") .. "/lua"  -- Adjust as needed
+  local modules = find_modules(base_dir)
+  for _, module in ipairs(modules) do
+    local status_ok, required = pcall(require, module)
 
-  add_keys(require("fanteria.elemental.lspconfig").keys)
-  add_keys(require("fanteria.session").keys)
-  add_keys(require("fanteria.utils.dap").keys)
-  add_keys(require("fanteria.utils.dapui").keys)
-  add_keys(require("fanteria.utils.neogen").keys)
-  add_keys(require("fanteria.utils.nvim-coverage").keys)
-  add_keys(require("fanteria.utils.nvim-tree").keys)
-  add_keys(require("fanteria.utils.trouble").keys)
-  add_keys(require("fanteria.visual.gitsigns").keys)
-  add_keys(require("fanteria.utils.telescope").keys)
-  add_keys(require("fanteria.utils.gen").keys)
+    if not status_ok then
+      vim.notify("Cannot load module" .. module, vim.log.levels.ERROR)
+    elseif type(required) == "table" and required.keys ~= nil then
+      add_keys(required.keys)
+    end
+  end
 
   return merged
 end
 
-M.opts = {
-  delay = 1200,
-  win = {
-    padding = { 1, 1 },
-  },
-  spec = get_keys(),
-}
+--- Which-key options.
+---@return table Options table
+function M.opts()
+  return {
+    delay = 1200,
+    win = {
+      padding = { 1, 1 },
+    },
+    spec = get_keys(),
+  }
+end
 
 return M

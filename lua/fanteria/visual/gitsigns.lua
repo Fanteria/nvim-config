@@ -1,6 +1,6 @@
 local M = {}
 
-
+--- Git signs options.
 M.opts = {
   signs = {
     add = { text = "▎" },
@@ -11,16 +11,8 @@ M.opts = {
   },
 }
 
-M.setup = function(plug, opts)
-  local gitsigns_ok, gitsigns = pcall(require, "gitsigns")
-  if not gitsigns_ok then
-    vim.notify(plug.name .. " cannot be loaded")
-    return
-  end
-  gitsigns.setup(opts)
-end
-
 local fn = require("utils").fn
+--- Keymaps.
 M.keys = {
   { "<leader>g", group = "Git" },
   {

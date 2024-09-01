@@ -1,5 +1,6 @@
 local M = {}
 
+--- Web dev icons.
 M.opts = {
   override_by_extension = {
     ["tpp"] = {

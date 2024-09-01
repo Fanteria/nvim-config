@@ -1,5 +1,6 @@
 local M = {}
 
+--- Treesitter text objects options.
 M.opts = {
   select = {
     enable = true,

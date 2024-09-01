@@ -1,5 +1,6 @@
 local M = {}
 
+--- Material options.
 M.opts = {
   contrast = {
     cursor_line = true,
@@ -42,7 +43,10 @@ M.opts = {
   end,
 }
 
-M.custom_highlights = function(c)
+--- Create custom highlights.
+---@param c table Colors.
+---@return table Custom highlights.
+function M.custom_highlights(c)
   local h = {}
 
   h.Structure = { fg = c.main.purple }
@@ -78,7 +82,10 @@ M.custom_highlights = function(c)
   return h
 end
 
-M.setup = function (_, opts)
+--- Setup function.
+---@param _ table Plugin data.
+---@param opts ?table Options.
+function M.setup(_, opts)
   local material_ok, material = pcall(require, "material")
   if not material_ok then
     vim.cmd("colorscheme default")

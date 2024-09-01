@@ -1,5 +1,6 @@
 local M = {}
 
+--- Nvim-tree options.
 M.opts = {
   disable_netrw = true, -- completely disable vim's file explorer
   sync_root_with_cwd = true,
@@ -100,6 +101,7 @@ M.opts = {
 }
 
 local fn = require("utils").fn
+--- Keymaps.
 M.keys = {
   {
     "<leader>e",

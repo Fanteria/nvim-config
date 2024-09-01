@@ -2,7 +2,8 @@ local M = {}
 
 M.enabled = true
 
-M.toggle_whitespaces = function()
+--- Toggles whitespace visibility in all windows of the current tab.
+function M.toggle_whitespaces()
   local ibl = require("ibl")
   local tabpage = vim.api.nvim_get_current_tabpage()
   local win = vim.api.nvim_get_current_win()
@@ -18,7 +19,7 @@ M.toggle_whitespaces = function()
   M.enabled = not M.enabled
 end
 
-
+--- Indent blank line options.
 M.opts = {
   enabled = M.enabled,
   indent = {

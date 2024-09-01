@@ -1,10 +1,14 @@
 local M = {}
 
+--- Autopairs options.
 M.opts = {
-	check_ts = true,
+  check_ts = true,
 }
 
-M.setup = function(_, opts)
+--- Setup function.
+---@param _ table Plugin data.
+---@param opts ?table Options.
+function M.setup(_, opts)
   require("nvim-autopairs").setup(opts)
 
   local cmp_autopairs = require("nvim-autopairs.completion.cmp")

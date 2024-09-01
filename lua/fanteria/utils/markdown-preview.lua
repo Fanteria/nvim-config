@@ -1,6 +1,7 @@
 local M = {}
 
-M.setup = function ()
+--- Setup function.
+function M.setup()
   local css_path = "css"
   local markdown_preview_css = "markdown-preview.css"
 

@@ -6,13 +6,16 @@ capabilities.textDocument.foldingRange = {
   lineFoldingOnly = true
 }
 
-local default_setup = function(server)
+--- Default setup for server.
+---@param server string Server name.
+local function default_setup(server)
   require("lspconfig")[server].setup({
     capabilities = capabilities,
   })
 end
 
 -- For bashls must be installed shellcheck on system.
+--- Mason options.
 M.opts = {
   ensure_installed = { "lua_ls", "clangd", "bashls", "rust_analyzer" },
   handlers = {
@@ -23,6 +26,7 @@ M.opts = {
   },
 }
 
+--- Options for servers.
 M.server_opts = {
   lua_ls = {
     capabilities = capabilities,

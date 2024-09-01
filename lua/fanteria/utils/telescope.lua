@@ -3,14 +3,19 @@ local M = {}
 --- Open selection and run function if some of options are selected.
 ---@param title string Selection window title.
 ---@param options string[] List of options.
----@param to_run fun(string):nil parameter
+---@param to_run fun(selected: string):nil parameter
 ---@param opts ?table Telescope options.
-M.open_selection = function (title, options, to_run, opts)
+function M.open_selection(title, options, to_run, opts)
   opts = opts or {}
-  local finders = require("telescope.finders")
-  local conf = require("telescope.config")
-  local actions = require("telescope.actions")
-  local pickers = require("telescope.pickers")
+  local pickers_ok, pickers = pcall(require, "telescope.pickers")
+  local finders_ok, finders = pcall(require, "telescope.finders")
+  local conf_ok, conf = pcall(require, "telescope.config")
+  local actions_ok, actions = pcall(require, "telescope.actions")
+  local action_state_ok, action_state = pcall(require, "telescope.actions.state")
+  if not pickers_ok or not finders_ok or not conf_ok or not actions_ok or not action_state_ok then
+    vim.notify("Telescope cannot be loaded.")
+    return
+  end
   pickers
       .new(opts, {
         prompt_title = title,
@@ -18,7 +23,7 @@ M.open_selection = function (title, options, to_run, opts)
         sorter = conf.values.generic_sorter(opts),
         attach_mappings = function(prompt_bufnr, _)
           actions.select_default:replace(function()
-            local selected_option = require("telescope.actions.state").get_selected_entry()[1]
+            local selected_option = action_state.get_selected_entry()[1]
             actions.close(prompt_bufnr)
             to_run(selected_option)
           end)
@@ -28,6 +33,7 @@ M.open_selection = function (title, options, to_run, opts)
       :find()
 end
 
+--- Telescope options
 M.opts = {
   defaults = {
     prompt_prefix = "󰍉 ",
@@ -35,7 +41,6 @@ M.opts = {
     path_display = { "smart" },
     sorting_strategy = "ascending",
     layout_strategy = "flex",
-    -- borderchars = {" ", " ", " ", " ", " ", " ", " ", " "},
     layout_config = {
       horizontal = {
         prompt_position = "top",
@@ -51,7 +56,11 @@ M.opts = {
   },
 }
 
-M.setup = function(_, opts)
+--- Setup function.
+---@param _ table Plugin data.
+---@param opts ?table Options.
+function M.setup(_, opts)
+  opts = opts or {}
   local telescope = require("telescope")
   local actions = require("telescope.actions")
 
@@ -106,6 +115,7 @@ M.setup = function(_, opts)
 end
 
 local fn = require("utils").fn
+--- Keymaps.
 M.keys = {
   {
     "<leader>u",
@@ -128,7 +138,7 @@ M.keys = {
   },
   {
     "<C-b>",
-    fn({"telescope.builtin", "telescope.themes"}, function(r)
+    fn({ "telescope.builtin", "telescope.themes" }, function(r)
       r["telescope.builtin"].buffers(r["telescope.themes"].get_dropdown({ previewer = false }))
     end),
     hidden = true,

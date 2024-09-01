@@ -1,18 +1,8 @@
 local M = {}
 
+
 local fn = require("utils").fn
-
-local opts = { noremap = true, silent = true }
-local map = vim.keymap.set
-
-local function maph(mapping, function_to_run)
-  if type(mapping) == "string" then
-    table.insert(M.keys, {mapping, function_to_run, mode = { "n" }, hidden = true})
-  else
-    table.insert(M.keys, mapping)
-  end
-end
-
+--- Keymaps
 M.keys = {
   -- TODO can conflict with tabs maps.
   { "<leader>t", group = "Toggle" },
@@ -43,10 +33,21 @@ M.keys = {
     "<cmd>execute '!xdg-open' shellescape(expand('<cfile>', 1))<CR>",
     desc = "Open path"
   },
-
-
-  hidden_mappings
 }
+
+--------------------
+-- Setup mappings --
+--------------------
+local function maph(mapping, function_to_run)
+  if type(mapping) == "string" then
+    table.insert(M.keys, {mapping, function_to_run, mode = { "n" }, hidden = true})
+  else
+    table.insert(M.keys, mapping)
+  end
+end
+
+local map = vim.keymap.set
+local opts = { noremap = true, silent = true }
 
 -- Map <leader> key
 vim.api.nvim_set_keymap("", "<Space>", "<Nop>", opts)

@@ -1,6 +1,9 @@
 local M = {}
 
-M.get_bufs = function()
+--- Get all active buffers buffers.
+---@return table<integer, string> Table of buffers, where key is buffer
+--- id and value is buffer description.
+function M.get_bufs()
   local loaded = {}
   for _, buf in pairs(vim.split(vim.fn.execute("buffers"), "\n")) do
     if string.len(buf) ~= 0 then
@@ -10,7 +13,9 @@ M.get_bufs = function()
   return loaded
 end
 
-M.get_open_bufs = function()
+--- Get add buffers opened in some window.
+---@return table<integer, integer> Key is buffer id and value is window id.
+function M.get_open_bufs()
   local aux = {}
   for _, win in pairs(vim.api.nvim_list_wins()) do
     aux[vim.api.nvim_win_get_buf(win)] = win
@@ -18,49 +23,31 @@ M.get_open_bufs = function()
   return aux
 end
 
-M.telescope_buffers_in_tabs = function (opts)
-	opts = opts or {}
-	local buffers = {}
+--- Open telescope picker with all buffers opened in some tab.
+---@param opts table Telescope options.
+function M.telescope_buffers_in_tabs(opts)
+  opts = opts or {}
+  local buffers = {}
   local buffers_data = {}
 
   local all = M.get_bufs()
   for bufrn, winrn in pairs(M.get_open_bufs()) do
-      buffers_data[all[bufrn]] = {
-        win = winrn,
-        tab = vim.api.nvim_win_get_tabpage(winrn),
-      }
-	    table.insert(buffers, all[bufrn])
+    buffers_data[all[bufrn]] = {
+      win = winrn,
+      tab = vim.api.nvim_win_get_tabpage(winrn),
+    }
+    table.insert(buffers, all[bufrn])
   end
 
-  local finders = require("telescope.finders")
-  local conf = require("telescope.config")
-  local actions = require("telescope.actions")
-  local pickers = require("telescope.pickers")
-  local action_state = require("telescope.actions.state")
-	pickers
-		.new(opts, {
-			prompt_title = "Buffers in tabs",
-			finder = finders.new_table({ results = buffers }),
-			sorter = conf.values.generic_sorter(opts),
-			attach_mappings = function(prompt_bufnr, _)
-				actions.select_default:replace(function()
-					actions.close(prompt_bufnr)
-					-- local selection = action_state.get_selected_entry()[1]
-          local selected = buffers_data[action_state.get_selected_entry()[1]]
-          vim.notify(vim.inspect(selected))
-          -- vim.api.nvim_tabpage_goto(selected.tab)
-          vim.cmd.tabnext(selected.tab)
-          vim.api.nvim_set_current_win(selected.win)
-          -- vim.cmd(":wincmd " .. selected.winrn)
-
-				end)
-				return true
-			end,
-		})
-		:find()
+  require("fanteria.utils.telescope").open_selection("Buffers in tabs", buffers, function(selected_option)
+    local selected = buffers_data[selected_option]
+    vim.cmd.tabnext(selected.tab)
+    vim.api.nvim_set_current_win(selected.win)
+  end, opts)
 end
 
-M.close_not_open_bufs = function()
+--- Close buffers that are not opened in any tab.
+function M.close_not_open_bufs()
   local open = M.get_open_bufs()
   for bufnr, _ in pairs(M.get_bufs()) do
     if not open[bufnr] then
@@ -69,7 +56,11 @@ M.close_not_open_bufs = function()
   end
 end
 
-M.notify = function(msg, lvl)
+--- Function to show vim notifications as system notifications.
+--- Is used as `vim.notify` function.
+---@param msg string Message content.
+---@param lvl any Logging level.
+function M.notify(msg, lvl)
   local level
   if lvl == vim.log.levels.ERROR then
     level = "critical"
@@ -79,7 +70,8 @@ M.notify = function(msg, lvl)
     level = "low"
   end
   local Job = require("plenary.job")
-  Job:new({command = "notify-send", args = { "-i", "/home/jirka/Neovim-mark.svg.png", "-u", level, "Neovim", msg} }):start()
+  Job:new({ command = "notify-send", args = { "-i", "/home/jirka/Neovim-mark.svg.png", "-u", level, "Neovim", msg } })
+      :start()
 end
 
 -- Helper function
@@ -108,7 +100,8 @@ local function parse_line(pos, line, query, tree, result)
   end
 end
 
--- Function to customize folded text
+--- Function to customize folded text. Used as `vim.wo.foldtext`.
+---@return table Highlighted line.
 function HighlightedFoldtext()
   local pos = vim.v.foldstart
   local end_pos = vim.v.foldend
@@ -134,4 +127,3 @@ function HighlightedFoldtext()
 end
 
 return M
-

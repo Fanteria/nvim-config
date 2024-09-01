@@ -1,5 +1,6 @@
 local M = {}
 
+--- Lua line options.
 M.opts = {
   options = {
     disabled_filetypes = { "alpha", "NvimTree" },

@@ -1,9 +1,10 @@
 local M = {}
 
-local fn = require("utils").fn
-
+--- Trouble options.
 M.opts = {}
 
+local fn = require("utils").fn
+--- Keymaps.
 M.keys = {
   { "<leader>T", group = "Trouble" },
   {

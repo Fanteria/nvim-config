@@ -1,6 +1,7 @@
 local M = {}
 
-M.setup = function(_, _)
+--- Setup function.
+function M.setup()
   local dapui = require("dapui")
   dapui.setup()
 
@@ -43,6 +44,7 @@ M.setup = function(_, _)
 end
 
 local fn = require("utils").fn
+--- Keymaps.
 M.keys = {
   {
     "<leader>dt",

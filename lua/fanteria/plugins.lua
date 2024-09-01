@@ -57,7 +57,7 @@ require("lazy").setup({
     opts = require("fanteria.elemental.conform").opts,
   },
 
-  -- completions
+  -- Completions
   {
     "hrsh7th/nvim-cmp", -- The completion plugin
     dependencies = {
@@ -71,16 +71,19 @@ require("lazy").setup({
     config = require("fanteria.elemental.cmp").setup,
   },
 
-  -- snippets
+  -- Snippets
   {
     "L3MON4D3/LuaSnip",
     build = "make install_jsregexp",
     opts = require("fanteria.elemental.luasnip").opts,
   },
 
-  -- Utils --
+  -- Utilities --
   {
     "folke/which-key.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
     event = "VeryLazy",
     opts = require("fanteria.utils.which-key").opts,
   },
@@ -194,14 +197,14 @@ require("lazy").setup({
     config = require("fanteria.visual.material").setup,
   },
 
-  -- Title page --
+  -- Title page
   {
     "goolord/alpha-nvim",
     config = require("fanteria.title.alpha").setup,
   },
   "ahmedkhalf/project.nvim",
 
-  -- LLM --
+  -- LLM
   {
     "David-Kunz/gen.nvim",
     opts = require("fanteria.utils.gen").opts,

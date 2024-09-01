@@ -1,5 +1,6 @@
 local M = {}
 
+--- Gen options.
 M.opts = {
     model = "deepseek-coder-v2:16b",
     retry_map = "<c-r>",
@@ -9,7 +10,10 @@ M.opts = {
     display_mode = "split",
 }
 
-M.setup = function(_, opts)
+--- Setup function.
+---@param _ table Plugin data.
+---@param opts ?table Options.
+function M.setup(_, opts)
   opts = opts or {}
   local gen = require("gen")
   gen.setup(opts)
@@ -25,6 +29,7 @@ M.setup = function(_, opts)
   }
 end
 
+--- Keymaps.
 M.keys = {
   {
     "<leader>A",

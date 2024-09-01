@@ -1,6 +1,6 @@
 local M = {}
 
--- Setup signs
+--- Setup signs
 local signs = {
   { name = "DiagnosticSignError", text = "" },
   { name = "DiagnosticSignWarn", text = "" },
@@ -8,7 +8,8 @@ local signs = {
   { name = "DiagnosticSignInfo", text = "" },
 }
 
-M.setup = function()
+--- Setup function.
+function M.setup()
   local lsp_defaults = require("lspconfig").util.default_config
 
   for _, sign in ipairs(signs) do
@@ -51,6 +52,7 @@ M.setup = function()
 end
 
 local fn = require("utils").fn
+--- Keymaps.
 M.keys = {
   { "<leader>L", group = "LSP" },
   {
