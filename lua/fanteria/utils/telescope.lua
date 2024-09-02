@@ -132,6 +132,12 @@ M.keys = {
     hidden = true,
   },
   {
+    "<leader>F",
+    fn("telescope.builtin", function(t) t.grep_string() end),
+    hidden = true,
+    mode = "v",
+  },
+  {
     "<C-p>",
     fn("telescope.builtin", function(t) t.find_files() end),
     hidden = true,
