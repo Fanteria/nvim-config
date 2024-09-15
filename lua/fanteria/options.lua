@@ -8,6 +8,8 @@ o.fileencoding = "utf-8"
 o.swapfile = false
 o.mouse = "a"
 
+o.hidden = true
+
 -- Other
 o.completeopt = { "menuone", "noselect" } -- for cmp
 o.conceallevel = 0                        -- `` visible in markdown

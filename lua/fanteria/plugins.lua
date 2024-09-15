@@ -218,7 +218,10 @@ require("lazy").setup({
   -- this plugin enables use buffers as tabs in ordinary editors
   -- "akinsho/bufferline.nvim",
   --
-  -- "akinsho/toggleterm.nvim",
+  {
+    "akinsho/toggleterm.nvim",
+    opts = require("fanteria.utils.toggleterm").opts
+  },
 
   -- Markdown preview
   {
