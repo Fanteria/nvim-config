@@ -13,13 +13,7 @@ Here are the steps for the initial setup:
 1. Clone my Neovim configuration repository to my machine.
 2. Launch Neovim.
 3. On the first run, the necessary plugins and dependencies will be installed automatically.
-
-To install an additional spell check language, follow these steps:
-
-1. Uncomment the line `disable_netrw = true` in the `nvim-tree.lua` configuration file. This line is responsible for completely disabling Vim's file explorer, which is temporarily required for the spell check installation.
-2. Restart Neovim to automatically install new language.
-3. After successfully installing the additional spell check language, revert the changes in the `nvim-tree.lua` configuration file.
-4. Again restart Neovim.
+4. Restart Neovim few times until all is installed.
 5. Run the `checkhealth` command to ensure a healthy Neovim installation. 
 
 ## Plugins
@@ -33,6 +27,7 @@ To install an additional spell check language, follow these steps:
 ##### Treesitter
 
 [Treesitter](https://github.com/nvim-treesitter/nvim-treesitter) is a powerful parsing system for Neovim, providing syntax highlighting, code folding, and more. Enhanced with additional plugin as [Treesitter context](https://github.com/nvim-treesitter/nvim-treesitter-context).
+[Treesitter textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)
 
 ##### LSP (Language Server Protocol)
 
@@ -63,6 +58,7 @@ To install an additional spell check language, follow these steps:
 - [Treesitter Playground](https://github.com/nvim-treesitter/playground): Provides a amazing playground for Treesitter.
 - [Vim-bbye](https://github.com/moll/vim-bbye): A plugin to delete buffers.
 - [Coverage](https://github.com/andythigpen/nvim-coverage): A plugin to show code coverage results.
+- [Trouble](https://github.com/folke/trouble.nvim): A plugin to get more diagnostics from LSP.
 
 ##### Git
 
@@ -87,10 +83,11 @@ To install an additional spell check language, follow these steps:
 
 I can't choose to add these plugins, but they can be very useful:
 
-- [vim-symlink](https://github.com/aymericbeaumet/vim-symlink): Automatically follows symlinks.
-- [bufferline.nvim](https://github.com/akinsho/bufferline.nvim): Enables using buffers as tabs.
-- [toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim): Provides a terminal toggle.
-- [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim): Enables Markdown preview.
+- [ ] [vim-symlink](https://github.com/aymericbeaumet/vim-symlink): Automatically follows symlinks.
+- [ ] [bufferline.nvim](https://github.com/akinsho/bufferline.nvim): Enables using buffers as tabs.
+- [x] [toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim): Provides a terminal toggle.
+- [x] [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim): Enables Markdown preview.
+- [x] [generate](https://github.com/eriks47/generate.nvim): Generation of implementation for C++.
 
 ## Conclusion
 

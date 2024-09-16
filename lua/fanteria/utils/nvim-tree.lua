@@ -2,7 +2,6 @@ local M = {}
 
 --- Nvim-tree options.
 M.opts = {
-  disable_netrw = true, -- completely disable vim's file explorer
   sync_root_with_cwd = true,
   diagnostics = {
     enable = true,
