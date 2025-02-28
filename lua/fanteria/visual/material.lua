@@ -60,6 +60,13 @@ function M.custom_highlights(c)
 
   h['@lsp.mod.virtual.cpp']   = { italic = true }
 
+  -- Vim diff
+  local darken = require("material.functions").darken
+  h["DiffAdd"] = { bg = darken(c.git.added, 0.25) , reverse = false }
+  h["DiffDelete"] = { bg = darken(c.git.removed, 0.4), fg = "#000000", reverse = false }
+  h["DiffChange"] = { bg = darken(c.git.modified, 0.25), reverse = false }
+  h["DiffText"] = { bg = darken(c.git.modified, 0.4), reverse = false }
+
   -- luasnip
   h.DiagnosticHint = { fg = c.main.cyan }
 
