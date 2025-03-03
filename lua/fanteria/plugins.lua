@@ -37,7 +37,7 @@ require("lazy").setup({
   -- LSP
   {
     "williamboman/mason.nvim",
-    config = true,
+    opts = { PATH = "append" }
   },
   {
     "williamboman/mason-lspconfig.nvim",
