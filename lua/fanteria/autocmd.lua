@@ -37,7 +37,7 @@ vim.api.nvim_create_autocmd({ "BufReadPre" }, {
       vim.b.is_large_buffer = true
       vim.cmd("syntax off")
       vim.cmd("IBLDisable")
-      vim.cmd("ILLUMINATEPAUSEBUF")
+      require("illuminate").pause_buf()
     else
       vim.b.is_large_buffer = false
     end
