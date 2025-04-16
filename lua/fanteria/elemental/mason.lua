@@ -14,14 +14,26 @@ local function default_setup(server)
   })
 end
 
--- For bashls must be installed shellcheck on system.
+-- For `bashls` must be installed shellcheck on system.
 --- Mason options.
 M.opts = {
-  ensure_installed = { "lua_ls", "clangd", "bashls", "rust_analyzer" },
+  ensure_installed = {
+    "lua_ls",
+    "clangd",
+    "bashls",
+    "rust_analyzer",
+    "harper_ls",
+  },
   handlers = {
     default_setup,
     lua_ls = function()
       require("lspconfig").lua_ls.setup(M.server_opts.lua_ls)
+    end,
+    rust_analyzer = function()
+      require("lspconfig").rust_analyzer.setup(M.server_opts.rust_analyzer)
+    end,
+    harper_ls = function()
+      require("lspconfig").harper_ls.setup(M.server_opts.harper_ls)
     end,
   },
 }
@@ -42,6 +54,7 @@ M.server_opts = {
     },
   },
   rust_analyzer = {
+    capabilities = capabilities,
     settings = {
       ["rust-analyzer"] = {
         check = {
@@ -49,6 +62,10 @@ M.server_opts = {
         }
       },
     },
+  },
+  harper_ls = {
+    capabilities = capabilities,
+    autostart = false,
   }
 }
 

@@ -64,7 +64,7 @@ require("lazy").setup({
       "L3MON4D3/LuaSnip",
       "hrsh7th/cmp-buffer",  -- buffer completions
       "hrsh7th/cmp-path",    -- path completions
-      "hrsh7th/cmp-cmdline", -- cmdline completions
+      "hrsh7th/cmp-cmdline", -- command line completions
       "hrsh7th/cmp-nvim-lsp",
     },
     opts = require("fanteria.elemental.cmp").opts,
@@ -91,7 +91,7 @@ require("lazy").setup({
     "nvim-telescope/telescope.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      -- extension like undotree
+      -- extension like undo-tree
       "debugloop/telescope-undo.nvim",
       -- vim select options are delegated to telescope
       "nvim-telescope/telescope-ui-select.nvim",
@@ -128,12 +128,12 @@ require("lazy").setup({
     'numToStr/Comment.nvim',
     lazy = false,
     config = true,
-    -- This plugin add few mappings
-    -- gcc to comment act line with line comment
-    -- gbc to comment act line with block comment
-    -- gc  to comment visual block with line comment
-    -- gb  to comment visual block with block comment
-    -- gcA to add line comment on the end of the line
+    -- This plugin add few mappings.
+    -- - gcc to comment act line with line comment
+    -- - gbc to comment act line with block comment
+    -- - gc  to comment visual block with line comment
+    -- - gb  to comment visual block with block comment
+    -- - gcA to add line comment on the end of the line
   },
   {
     'nvim-treesitter/playground',
@@ -190,7 +190,7 @@ require("lazy").setup({
     dependencies = 'kevinhwang91/promise-async',
   },
 
-  -- Colorscheme
+  -- Color scheme
   {
     "marko-cerovac/material.nvim",
     opts = require("fanteria.visual.material").opts,
