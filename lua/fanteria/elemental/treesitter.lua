@@ -3,7 +3,7 @@ local M = {}
 --- Treesitter options.
 M.opts = {
   ensure_installed = "all",
-  ignore_install = { "" },
+  ignore_install = { "ipkg" },
   highlight = {
     enable = true,
     disable = function()
