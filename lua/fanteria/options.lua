@@ -72,3 +72,5 @@ o.spelllang = "cs,en_us" -- csa is custom generated cs ascii only TODO add cs
 -- Disable providers
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
+
+o.wildmode = "list:longest,full"
