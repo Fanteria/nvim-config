@@ -23,6 +23,7 @@ M.opts = {
     "bashls",
     "rust_analyzer",
     "harper_ls",
+    "gopls",
   },
   handlers = {
     default_setup,
