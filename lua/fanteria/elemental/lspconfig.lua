@@ -1,20 +1,27 @@
 local M = {}
 
---- Setup signs
-local signs = {
-  { name = "DiagnosticSignError", text = "" },
-  { name = "DiagnosticSignWarn", text = "" },
-  { name = "DiagnosticSignHint", text = "" },
-  { name = "DiagnosticSignInfo", text = "" },
-}
 
 --- Setup function.
 function M.setup()
   local lsp_defaults = require("lspconfig").util.default_config
 
-  for _, sign in ipairs(signs) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-  end
+  -- Setup signs
+  vim.diagnostic.config({
+          signs = {
+                  text = {
+                          [vim.diagnostic.severity.ERROR] = " ",
+                          [vim.diagnostic.severity.WARN] = " ",
+                          [vim.diagnostic.severity.INFO] = "󰋼 ",
+                          [vim.diagnostic.severity.HINT] = "󰌵 ",
+                  },
+                  numhl = {
+                          [vim.diagnostic.severity.ERROR] = "",
+                          [vim.diagnostic.severity.WARN] = "",
+                          [vim.diagnostic.severity.HINT] = "",
+                          [vim.diagnostic.severity.INFO] = "",
+                  },
+          },
+  })
 
   -- Setup LISP defaults
   lsp_defaults.capabilities = vim.tbl_deep_extend(
