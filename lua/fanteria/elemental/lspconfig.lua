@@ -57,8 +57,28 @@ M.keys = {
   { "<leader>L", group = "LSP" },
   {
     "<leader>Ld",
-    fn("telescope", function(t) t.diagnostics() end),
+    fn("telescope.builtin", function(t) t.diagnostics() end),
     desc = "Diagnostics",
+  },
+  {
+    "<leader>LD",
+    "<cmd>Trouble diagnostics toggle<CR>",
+    desc = "Diagnostics",
+  },
+  {
+    "<leader>Lc",
+    fn("telescope.builtin", function(t) t.lsp_incoming_calls() end),
+    desc = "Incomming calls",
+  },
+  {
+    "<leader>LC",
+    fn("telescope.builtin", function(t) t.lsp_outgoing_calls() end),
+    desc = "Outgoing calls",
+  },
+  {
+    "<leader>LR",
+    fn("telescope.builtin", function(t) t.lsp_references() end),
+    desc = "References",
   },
   {
     "<leader>Li",
@@ -87,12 +107,12 @@ M.keys = {
   },
   {
     "<leader>Ls",
-    fn("telescope", function(t) t.lsp_document_symbols() end),
+    fn("telescope.builtin", function(t) t.lsp_document_symbols() end),
     desc = "Document Symbols"
   },
   {
     "<leader>LS",
-    fn("telescope", function(t) t.lsp_dynamic_workspace_symbols() end),
+    fn("telescope", function(t) t.lsp_workspace_symbols() end),
     desc = "Workspace Symbols",
   },
 }

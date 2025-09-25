@@ -115,7 +115,7 @@ function M.setup(_, opts)
 end
 
 local fn = require("utils").fn
---- Keymaps.
+--- Key maps.
 M.keys = {
   {
     "<leader>u",
@@ -138,6 +138,11 @@ M.keys = {
     mode = "v",
   },
   {
+    "<C-f>",
+    fn("telescope.builtin", function(t) t.resume() end),
+    hidden = true,
+  },
+  {
     "<C-p>",
     fn("telescope.builtin", function(t) t.find_files() end),
     hidden = true,
@@ -153,37 +158,37 @@ M.keys = {
   { "<leader>X", group = "Options" },
   {
     "<leader>Xc",
-    fn("telescope", function(t) t.colorscheme() end),
+    fn("telescope.builtin", function(t) t.colorscheme() end),
     desc = "Colorscheme",
   },
   {
     "<leader>Xh",
-    fn("telescope", function(t) t.help_tags() end),
+    fn("telescope.builtin", function(t) t.help_tags() end),
     desc = "Find Help",
   },
   {
     "<leader>Xm",
-    fn("telescope", function(t) t.man_pages() end),
+    fn("telescope.builtin", function(t) t.man_pages() end),
     desc = "Man Pages",
   },
   {
     "<leader>Xr",
-    fn("telescope", function(t) t.oldfiles() end),
+    fn("telescope.builtin", function(t) t.oldfiles() end),
     desc = "Open Recent File",
   },
   {
     "<leader>XR",
-    fn("telescope", function(t) t.registers() end),
+    fn("telescope.builtin", function(t) t.registers() end),
     desc = "Registers",
   },
   {
     "<leader>Xk",
-    fn("telescope", function(t) t.keymaps() end),
+    fn("telescope.builtin", function(t) t.keymaps() end),
     desc = "Keymaps",
   },
   {
     "<leader>XC",
-    fn("telescope", function(t) t.commands() end),
+    fn("telescope.builtin", function(t) t.commands() end),
     desc = "Commands",
   },
   {

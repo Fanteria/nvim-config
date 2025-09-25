@@ -67,22 +67,22 @@ M.keys = {
   },
   {
     "<leader>go",
-    fn("telescope", function(t) t.git_status() end),
+    fn("telescope.builtin", function(t) t.git_status() end),
     desc = "Open changed file",
   },
   {
     "<leader>gb",
-    fn("telescope", function(t) t.git_branches({ show_remote_tracking_branches = false }) end),
+    fn("telescope.builtin", function(t) t.git_branches({ show_remote_tracking_branches = false }) end),
     desc = "Checkout branch",
   },
   {
     "<leader>gB",
-    fn("telescope", function(t) t.git_branches() end),
+    fn("telescope.builtin", function(t) t.git_branches() end),
     desc = "Checkout branch with remote",
   },
   {
     "<leader>gC",
-    fn("telescope", function(t) t.git_commits() end),
+    fn("telescope.builtin", function(t) t.git_commits() end),
     desc = "Checkout commit",
   },
   {
