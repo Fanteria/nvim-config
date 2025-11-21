@@ -57,6 +57,7 @@ function M.custom_highlights(c)
   h["@namespace"]             = { fg = c.main.paleblue }
   h["@keyword"]               = { fg = c.main.purple }
   h["Exception"]              = { fg = c.main.red }
+  h['@variable.member']       = { fg = c.main.paleblue }
 
   h['@lsp.mod.virtual.cpp']   = { italic = true }
 
