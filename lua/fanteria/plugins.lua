@@ -46,15 +46,12 @@ require("lazy").setup({
       "neovim/nvim-lspconfig",
     },
     opts = require("fanteria.elemental.mason").opts,
+    config = require("fanteria.elemental.mason").setup,
   },
   {
     "neovim/nvim-lspconfig",
     version = false,
     config = require("fanteria.elemental.lspconfig").setup,
-  },
-  {
-    'stevearc/conform.nvim',
-    opts = require("fanteria.elemental.conform").opts,
   },
 
   -- Completions

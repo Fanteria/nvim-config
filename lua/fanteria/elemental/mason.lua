@@ -6,55 +6,46 @@ capabilities.textDocument.foldingRange = {
   lineFoldingOnly = true
 }
 
---- Default setup for server.
----@param server string Server name.
-local function default_setup(server)
-  require("lspconfig")[server].setup({
-    capabilities = capabilities,
-  })
-end
-
--- For `bashls` must be installed shellcheck on system.
---- Mason options.
+-- Mason options - only handles installation now
 M.opts = {
   ensure_installed = {
     "lua_ls",
     "clangd",
     "bashls",
     "rust_analyzer",
-    "harper_ls",
     "gopls",
-  },
-  handlers = {
-    default_setup,
-    lua_ls = function()
-      require("lspconfig").lua_ls.setup(M.server_opts.lua_ls)
-    end,
-    rust_analyzer = function()
-      require("lspconfig").rust_analyzer.setup(M.server_opts.rust_analyzer)
-    end,
-    harper_ls = function()
-      require("lspconfig").harper_ls.setup(M.server_opts.harper_ls)
-    end,
   },
 }
 
---- Options for servers.
-M.server_opts = {
-  lua_ls = {
+function M.setup(_, opts)
+  require("mason-lspconfig").setup(opts)
+  -- Configure servers AFTER mason-lspconfig setup
+
+  -- Configure lua_ls
+  vim.lsp.config('lua_ls', {
     capabilities = capabilities,
     settings = {
       Lua = {
         runtime = {
           version = 'LuaJIT'
         },
-        diagnostics = {
-          globals = { "vim" },
+        workspace = {
+          library = {
+            vim.env.VIMRUNTIME,
+            -- Add more paths if needed
+            -- "${3rd}/luv/library",
+          },
+          checkThirdParty = false,
+        },
+        telemetry = {
+          enable = false,
         },
       },
     },
-  },
-  rust_analyzer = {
+  })
+
+  -- Configure rust_analyzer
+  vim.lsp.config('rust_analyzer', {
     capabilities = capabilities,
     settings = {
       ["rust-analyzer"] = {
@@ -63,11 +54,8 @@ M.server_opts = {
         }
       },
     },
-  },
-  harper_ls = {
-    capabilities = capabilities,
-    autostart = false,
-  }
-}
+  })
+
+end
 
 return M
