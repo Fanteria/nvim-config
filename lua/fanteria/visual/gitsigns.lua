@@ -17,12 +17,12 @@ M.keys = {
   { "<leader>g", group = "Git" },
   {
     "<leader>gj",
-    fn("gitsigns", function(g) g.next_hunk() end),
+    fn("gitsigns", function(g) g.nav_hunk("next", { wrap = true }) end),
     desc = "Next hunk",
   },
   {
     "<leader>gk",
-    fn("gitsigns", function(g) g.prev_hunk() end),
+    fn("gitsigns", function(g) g.nav_hunk("prev", { wrap = true }) end),
     desc = "Prev Hunk",
   },
   {
