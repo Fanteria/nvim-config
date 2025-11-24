@@ -54,6 +54,12 @@ require("lazy").setup({
     config = require("fanteria.elemental.lspconfig").setup,
   },
 
+  -- Formatting
+  {
+    'stevearc/conform.nvim',
+    opts = require("fanteria.elemental.conform").opts,
+  },
+
   -- Completions
   {
     "hrsh7th/nvim-cmp", -- The completion plugin

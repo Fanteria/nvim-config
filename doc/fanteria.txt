@@ -101,6 +101,9 @@ Mason-lspconfig.nvim      https://github.com/williamboman/mason-lspconfig.nvim
 Nvim-lspconfig                        https://github.com/neovim/nvim-lspconfig
   Provides configurations for various language servers.
 
+Conform                               https://github.com/stevearc/conform.nvim
+  Setup for formatters.
+
 Nvim-cmp                                   https://github.com/hrsh7th/nvim-cmp
   A powerful completion framework for Neovim. Enhanced with additional plugins
   as:
