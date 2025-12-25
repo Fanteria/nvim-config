@@ -207,13 +207,6 @@ require("lazy").setup({
   },
   "ahmedkhalf/project.nvim",
 
-  -- LLM
-  {
-    "David-Kunz/gen.nvim",
-    opts = require("fanteria.utils.gen").opts,
-    config = require("fanteria.utils.gen").setup
-  },
-
   -- this plugin automatically follow symlinks if are opened
   -- I use it to auto follow from `include` directories
   -- "aymericbeaumet/vim-symlink"
